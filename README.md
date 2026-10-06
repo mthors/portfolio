@@ -124,23 +124,50 @@ portfolio/
 
 ---
 
-## Docker Workflows
+## Running with Docker
 
 The project includes a production-ready, multi-stage `Dockerfile` leveraging Next.js standalone output to minimize image footprint.
 
-### Build Docker Image
+### 1. Build the Docker Image
 
 ```bash
 docker build -t moh-thoriqi-sahal-portfolio:latest .
 ```
 
-### Run Container
+### 2. Run the Container
 
 ```bash
 docker run -d --name portfolio -p 3000:3000 moh-thoriqi-sahal-portfolio:latest
 ```
 
-The application will be accessible at [http://localhost:3000](http://localhost:3000).
+- **Exposed Port:** The container exposes port `3000` (mapped to `3000` on host via `-p 3000:3000`).
+- **Network Binding:** Next.js binds to `0.0.0.0` within the container, making it accessible from the host.
+
+### 3. Verify the Container is Running
+
+- **Check container status and health:**
+  ```bash
+  docker ps
+  ```
+- **Inspect container logs:**
+  ```bash
+  docker logs portfolio
+  ```
+- **Verify HTTP response & health endpoint:**
+  ```bash
+  curl http://localhost:3000/api/health
+  ```
+  Or navigate to [http://localhost:3000](http://localhost:3000) in your browser.
+
+### 4. Stop and Remove the Container
+
+```bash
+# Stop the running container
+docker stop portfolio
+
+# Remove the container
+docker rm portfolio
+```
 
 ---
 

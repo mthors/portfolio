@@ -1,29 +1,40 @@
-# Dependencies & Builds
+# Dependencies & Build Outputs
 node_modules
 .next
 /out
 /build
 
-# Git & CI
+# Git & CI/CD
 .git
 .github
 
-# Testing artifacts
+# Testing Artifacts & Reports
 tests
 test-results
 playwright-report
 blob-report
 coverage
 
-# Environment secrets
+# Environment Secrets
 .env
 .env*.local
 .env.production
 .env.development
+.env.test
 
-# Documentation
+# Documentation & Specifications
 *.md
 !README.md
 
-# Config files not needed in container build
+# Tooling, Logs & Editor Files
 .prettier*
+.vscode
+.idea
+.agents
+*.tsbuildinfo
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+.DS_Store
+Thumbs.db

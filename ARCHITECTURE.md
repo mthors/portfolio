@@ -61,13 +61,19 @@
 
 ## 4. Planned Docker & CI/CD Architecture
 
-### Containerization Strategy
+### Containerization Architecture (Production-Ready Docker)
 
-- **Multi-Stage Build:**
-  - `deps`: Installs production and build dependencies cleanly (`npm ci`).
-  - `builder`: Builds Next.js in standalone mode with telemetry disabled.
-  - `runner`: Uses a minimal `node:22-alpine` base image, runs under an unprivileged user (`nextjs:nodejs`), and copies only the standalone output and static assets.
-- **Target Container Footprint:** Sub-150MB lightweight production container runnable via `docker run -p 3000:3000 portfolio`.
+The containerization strategy is designed for a compact footprint, privilege reduction, and direct compatibility with the eventual Linux/VPS reverse-proxy deployment (e.g. Caddy/Nginx reverse-proxying to the Next.js container):
+
+- **Base Image:** `node:22-alpine` (Alpine Linux) chosen as an official lightweight base to minimize unnecessary system utilities and target a compact container footprint.
+- **Multi-Stage Build Pipeline:**
+  1. `deps`: Installs system dependencies (`libc6-compat`) and strictly runs `npm ci` from `package-lock.json` to ensure deterministic builds.
+  2. `builder`: Ingests dependencies and project source, disables telemetry (`NEXT_TELEMETRY_DISABLED=1`), and compiles the Next.js production build with Turbopack.
+  3. `runner`: A fresh Alpine runtime image that completely discards source code, development dependencies, and build tools.
+- **Standalone Output Optimization:** Next.js `output: "standalone"` traces runtime dependencies, outputting a self-contained Node server (`server.js`) into `.next/standalone`. The runner stage copies only `.next/standalone`, public assets (`public/`), and static files (`.next/static/`), targeting an optimized runtime image without full development dependencies or unneeded source trees.
+- **Security & Non-Root Execution:** The container explicitly creates an unprivileged system user and group (`nextjs:nodejs`, UID/GID 1001). Dropping root privileges (`USER nextjs`) applies the principle of least privilege, reducing operating privileges and helping limit the impact if an application component is compromised.
+- **Healthcheck & Observability:** Uses BusyBox's built-in `wget` to poll the internal `/api/health` HTTP endpoint periodically from inside the container (`HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3`), allowing container runtimes and supervisors to verify application health without requiring additional packages.
+- **Host Binding:** Binds `HOSTNAME=0.0.0.0` and `PORT=3000` to allow traffic ingress from Docker bridge networks and host reverse proxies.
 
 ### Continuous Integration (CI/CD)
 
