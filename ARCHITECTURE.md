@@ -86,3 +86,6 @@ The automated GitHub Actions workflow (`.github/workflows/ci.yml`) validates eve
 5. Unit and component tests (`npm run test` via Vitest + React Testing Library)
 6. Production bundle build (`npm run build`)
 7. End-to-end smoke tests (`npm run test:e2e` via Playwright Chromium)
+8. Production Docker image build validation (`docker/build-push-action` with `push: false`, tagging `portfolio:ci`)
+
+The CI workflow currently validates that the repository can successfully produce its production Docker image. Container registry publishing (e.g. GitHub Packages / GHCR, Docker Hub) and automated server deployment are intentionally deferred to future milestones.

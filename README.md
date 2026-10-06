@@ -128,7 +128,13 @@ portfolio/
 
 The project includes a production-ready, multi-stage `Dockerfile` leveraging Next.js standalone output to minimize image footprint.
 
-### 1. Build the Docker Image
+> **Note on Local vs. CI Docker:**
+>
+> - **CI Validation:** GitHub Actions automatically tests and validates the production Docker build on every push and pull request.
+> - **No Registry Publishing:** The image is built during CI to ensure build reproducibility, but is not pushed to any container registry. Registry publishing and automated deployment are intentionally deferred to a future milestone.
+> - **Local Docker is Optional:** Having Docker installed locally is optional; development and automated tests run locally with standard Node.js tooling.
+
+### 1. Build the Docker Image (Local)
 
 ```bash
 docker build -t moh-thoriqi-sahal-portfolio:latest .
