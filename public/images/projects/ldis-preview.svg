@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%">
+  <rect width="800" height="450" fill="#0b1727"/>
+  <rect x="40" y="40" width="720" height="370" rx="8" fill="#101f31" stroke="#24384d" stroke-width="2"/>
+  <rect x="40" y="40" width="720" height="40" rx="8" fill="#14263a"/>
+  <circle cx="65" cy="60" r="5" fill="#fb7185"/>
+  <circle cx="85" cy="60" r="5" fill="#facc15"/>
+  <circle cx="105" cy="60" r="5" fill="#4ade80"/>
+  <text x="130" y="65" fill="#718195" font-family="monospace" font-size="12">LDIS.Desktop.exe [WinForms / SQLite]</text>
+  <rect x="70" y="110" width="200" height="120" rx="6" fill="#07111f" stroke="#24384d"/>
+  <rect x="300" y="110" width="430" height="260" rx="6" fill="#07111f" stroke="#24384d"/>
+  <text x="320" y="145" fill="#20d7f5" font-family="monospace" font-size="14" font-weight="bold">INVENTORY CONTROL &amp; AUDIT</text>
+  <line x1="320" y1="165" x2="700" y2="165" stroke="#24384d" stroke-width="1"/>
+  <rect x="320" y="185" width="380" height="24" rx="4" fill="#101f31"/>
+  <rect x="320" y="220" width="380" height="24" rx="4" fill="#101f31"/>
+  <rect x="320" y="255" width="380" height="24" rx="4" fill="#101f31"/>
+  <rect x="320" y="290" width="380" height="24" rx="4" fill="#101f31"/>
+  <text x="90" y="150" fill="#f4f7fb" font-family="sans-serif" font-size="14" font-weight="bold">WAREHOUSE</text>
+  <text x="90" y="175" fill="#a9b7c7" font-family="monospace" font-size="11">SKU items: 1,420</text>
+  <text x="90" y="195" fill="#4ade80" font-family="monospace" font-size="11">DB: SQLite Local</text>
+</svg>

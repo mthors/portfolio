@@ -1,0 +1,29 @@
+# Dependencies & Builds
+node_modules
+.next
+/out
+/build
+
+# Git & CI
+.git
+.github
+
+# Testing artifacts
+tests
+test-results
+playwright-report
+blob-report
+coverage
+
+# Environment secrets
+.env
+.env*.local
+.env.production
+.env.development
+
+# Documentation
+*.md
+!README.md
+
+# Config files not needed in container build
+.prettier*
