@@ -15,11 +15,27 @@ test.describe("M0 Smoke Test", () => {
     const heading = page.locator("h1");
     await expect(heading).toContainText(/Building Practical Solutions/i);
 
+    // Verify About Section
+    const aboutSection = page.locator("#about");
+    await expect(aboutSection).toBeVisible();
+
+    // Verify Experience Section
+    const experienceSection = page.locator("#experience");
+    await expect(experienceSection).toBeVisible();
+
     // Verify Projects Section and entries
     const projectSection = page.locator("#projects");
     await expect(projectSection).toBeVisible();
     await expect(page.getByText(/Lightweight Desktop Inventory System/i)).toBeVisible();
     await expect(page.getByText(/Outsole Catalog/i)).toBeVisible();
+
+    // Verify Skills Section
+    const skillsSection = page.locator("#skills");
+    await expect(skillsSection).toBeVisible();
+
+    // Verify Contact Section
+    const contactSection = page.locator("#contact");
+    await expect(contactSection).toBeVisible();
 
     // Verify Footer Shell
     const footer = page.locator("footer");

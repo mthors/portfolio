@@ -13,8 +13,7 @@ export function Footer() {
               Moh Thoriqi Sahal
             </p>
             <p className="mt-1 text-sm text-(--text-secondary)">
-              IT Engineer &amp; Software Developer &mdash; Practical solutions for real-world
-              operations.
+              IT Engineer &amp; Software Developer. Practical solutions for real-world operations.
             </p>
           </div>
 
