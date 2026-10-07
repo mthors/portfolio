@@ -18,9 +18,10 @@ test.describe("M0 Smoke Test", () => {
     const nav = page.locator("nav[aria-label='Main Navigation']");
     await expect(nav).toBeVisible();
 
-    // Verify Hero content
+    // Verify Hero content & ambient technical visual
     const heading = page.locator("h1");
     await expect(heading).toContainText(/Building Practical Solutions/i);
+    await expect(page.getByTestId("hero-ambient-visual")).toBeAttached();
 
     // Verify About Section
     const aboutSection = page.locator("#about");
@@ -30,9 +31,12 @@ test.describe("M0 Smoke Test", () => {
     const experienceSection = page.locator("#experience");
     await expect(experienceSection).toBeVisible();
 
-    // Verify Projects Section and entries
+    // Verify Projects Section, entries, and horizontal rail navigation
     const projectSection = page.locator("#projects");
     await expect(projectSection).toBeVisible();
+    await expect(page.getByTestId("project-rail")).toBeVisible();
+    await expect(page.getByRole("button", { name: "Previous projects" })).toBeVisible();
+    await expect(page.getByRole("button", { name: "Next projects" })).toBeVisible();
     await expect(page.getByText(/Lightweight Desktop Inventory System/i)).toBeVisible();
     await expect(page.getByText(/Outsole Catalog/i)).toBeVisible();
 
@@ -46,16 +50,16 @@ test.describe("M0 Smoke Test", () => {
 
     const whatsappCta = contactSection.getByRole("link", { name: /WhatsApp/i });
     await expect(whatsappCta).toBeVisible();
-    await expect(whatsappCta).toHaveAttribute("href", /^https:\/\/wa\.me\//);
+    await expect(whatsappCta).toHaveAttribute("href", "https://wa.me/6285730279779");
     await expect(whatsappCta).toHaveAttribute("target", "_blank");
 
     const emailCta = contactSection.getByRole("link", { name: /Email/i });
     await expect(emailCta).toBeVisible();
-    await expect(emailCta).toHaveAttribute("href", /^mailto:/);
+    await expect(emailCta).toHaveAttribute("href", "mailto:mtsthor@gmail.com");
 
     const githubCta = contactSection.getByRole("link", { name: /GitHub/i });
     await expect(githubCta).toBeVisible();
-    await expect(githubCta).toHaveAttribute("href", /^https:\/\/github\.com\//);
+    await expect(githubCta).toHaveAttribute("href", "https://github.com/mthors");
 
     // Verify Footer Shell
     const footer = page.locator("footer");

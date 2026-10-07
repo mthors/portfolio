@@ -1,3 +1,9 @@
+export const contactConfig = {
+  email: "mtsthor@gmail.com",
+  github: "https://github.com/mthors",
+  whatsapp: "6285730279779",
+} as const;
+
 export interface ContactConfig {
   whatsapp: {
     number: string;
@@ -18,29 +24,33 @@ export interface ContactConfig {
   };
 }
 
+/**
+ * Strips non-digits (spaces, dashes, '+') to format into standard wa.me link
+ */
+export function formatWhatsAppUrl(number: string): string {
+  const cleanNumber = number.replace(/[^0-9]/g, "");
+  return `https://wa.me/${cleanNumber}`;
+}
+
 export function getContactConfig(): ContactConfig {
-  const envNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER?.trim();
-  // Strip non-digits (e.g. spaces, dashes, '+') to adhere to official wa.me format
-  const cleanNumber = envNumber ? envNumber.replace(/[^0-9]/g, "") : "";
-  const whatsappUrl = cleanNumber
-    ? `https://wa.me/${cleanNumber}`
-    : "https://wa.me/YOUR_PHONE_NUMBER";
+  const cleanWhatsAppNumber = contactConfig.whatsapp.replace(/[^0-9]/g, "");
+  const whatsappUrl = formatWhatsAppUrl(contactConfig.whatsapp);
 
   return {
     whatsapp: {
-      number: cleanNumber || "YOUR_PHONE_NUMBER",
+      number: cleanWhatsAppNumber,
       url: whatsappUrl,
       label: "WhatsApp Me",
       ariaLabel: "Chat directly with Moh Thoriqi Sahal on WhatsApp",
     },
     email: {
-      address: "contact@thoriqisahal.dev",
-      url: "mailto:contact@thoriqisahal.dev",
+      address: contactConfig.email,
+      url: `mailto:${contactConfig.email}`,
       label: "Send Email",
       ariaLabel: "Send an email to Moh Thoriqi Sahal",
     },
     github: {
-      url: "https://github.com/thoriqisahal",
+      url: contactConfig.github,
       label: "GitHub Profile",
       ariaLabel: "View Moh Thoriqi Sahal on GitHub",
     },

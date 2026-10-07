@@ -9,6 +9,7 @@ export const ProjectSchema = z.object({
   shortDescription: z.string().min(1),
   description: z.string().min(1),
   image: z.string().min(1),
+  thumbnail: z.string().optional(),
   technologies: z.array(z.string()).min(1),
   highlights: z.array(z.string()).min(1),
   githubUrl: z.string().url().optional(),

@@ -1,40 +1,37 @@
-import { describe, it, expect, beforeEach, afterEach } from "vitest";
-import { getContactConfig } from "@/content/contact";
+import { describe, it, expect } from "vitest";
+import { contactConfig, getContactConfig, formatWhatsAppUrl } from "@/content/contact";
 
-describe("Contact Configuration", () => {
-  const originalEnv = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
-
-  beforeEach(() => {
-    delete process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
+describe("Contact Configuration (Public Source of Truth)", () => {
+  it("provides the canonical contactConfig with real public contact destinations", () => {
+    expect(contactConfig.email).toBe("mtsthor@gmail.com");
+    expect(contactConfig.github).toBe("https://github.com/mthors");
+    expect(contactConfig.whatsapp).toBe("6285730279779");
   });
 
-  afterEach(() => {
-    if (originalEnv !== undefined) {
-      process.env.NEXT_PUBLIC_WHATSAPP_NUMBER = originalEnv;
-    } else {
-      delete process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
-    }
-  });
-
-  it("returns default contact options with placeholder WhatsApp URL when env is unset", () => {
+  it("returns fully structured contact options matching the real destinations", () => {
     const config = getContactConfig();
+
+    // WhatsApp
     expect(config.whatsapp.label).toBe("WhatsApp Me");
-    expect(config.whatsapp.url).toBe("https://wa.me/YOUR_PHONE_NUMBER");
+    expect(config.whatsapp.number).toBe("6285730279779");
+    expect(config.whatsapp.url).toBe("https://wa.me/6285730279779");
     expect(config.whatsapp.ariaLabel).toContain("WhatsApp");
 
+    // Email
     expect(config.email.label).toBe("Send Email");
-    expect(config.email.url).toBe("mailto:contact@thoriqisahal.dev");
+    expect(config.email.address).toBe("mtsthor@gmail.com");
+    expect(config.email.url).toBe("mailto:mtsthor@gmail.com");
     expect(config.email.ariaLabel).toContain("email");
 
+    // GitHub
     expect(config.github.label).toBe("GitHub Profile");
-    expect(config.github.url).toBe("https://github.com/thoriqisahal");
+    expect(config.github.url).toBe("https://github.com/mthors");
     expect(config.github.ariaLabel).toContain("GitHub");
   });
 
   it("formats international phone numbers by stripping non-digits into wa.me format", () => {
-    process.env.NEXT_PUBLIC_WHATSAPP_NUMBER = "+62 812-3456-7890";
-    const config = getContactConfig();
-    expect(config.whatsapp.url).toBe("https://wa.me/6281234567890");
-    expect(config.whatsapp.number).toBe("6281234567890");
+    expect(formatWhatsAppUrl("+62 857-3027-9779")).toBe("https://wa.me/6285730279779");
+    expect(formatWhatsAppUrl("62 857 3027 9779")).toBe("https://wa.me/6285730279779");
+    expect(formatWhatsAppUrl("6285730279779")).toBe("https://wa.me/6285730279779");
   });
 });

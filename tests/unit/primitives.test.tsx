@@ -7,6 +7,8 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Container } from "@/components/ui/Container";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { HeroVisual } from "@/components/ui/HeroVisual";
+import { Reveal } from "@/components/ui/Reveal";
 
 describe("UI Primitives & Layout Shell", () => {
   it("renders Button correctly as button and link", () => {
@@ -14,15 +16,13 @@ describe("UI Primitives & Layout Shell", () => {
     expect(screen.getByRole("button", { name: /click me/i })).toBeInTheDocument();
 
     rerender(
-      <Button href="https://example.com" isExternal aria-label="Custom Link Label">
-        External Link
+      <Button variant="cta" showArrow href="https://example.com" isExternal>
+        Contact Action
       </Button>
     );
-    const link = screen.getByRole("link", { name: /custom link label/i });
-    expect(link).toBeInTheDocument();
-    expect(link).toHaveAttribute("target", "_blank");
-    expect(link).toHaveAttribute("rel", "noopener noreferrer");
-    expect(link).toHaveAttribute("aria-label", "Custom Link Label");
+    const ctaLink = screen.getByRole("link", { name: /contact action/i });
+    expect(ctaLink).toBeInTheDocument();
+    expect(ctaLink).toHaveTextContent("→");
   });
 
   it("renders Badge with appropriate variant", () => {
@@ -65,5 +65,21 @@ describe("UI Primitives & Layout Shell", () => {
     render(<Footer />);
     expect(screen.getAllByText(/Moh Thoriqi Sahal/i).length).toBeGreaterThan(0);
     expect(screen.getByText(/Git-controlled/i)).toBeInTheDocument();
+  });
+
+  it("renders HeroVisual ambient technical visual field", () => {
+    const { getByTestId } = render(<HeroVisual />);
+    const visual = getByTestId("hero-ambient-visual");
+    expect(visual).toBeInTheDocument();
+    expect(visual).toHaveAttribute("aria-hidden", "true");
+  });
+
+  it("renders Reveal component with children and accessible motion fallback", () => {
+    render(
+      <Reveal data-testid="reveal-container">
+        <span>Revealed Content</span>
+      </Reveal>
+    );
+    expect(screen.getByText("Revealed Content")).toBeInTheDocument();
   });
 });

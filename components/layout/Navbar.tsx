@@ -40,9 +40,13 @@ export function Navbar() {
               <a
                 key={item.label}
                 href={item.href}
-                className="text-sm font-medium text-(--text-secondary) hover:text-(--accent) transition-colors focus:outline-none focus:text-(--accent)"
+                className="relative py-1 text-sm font-medium text-(--text-secondary) hover:text-(--accent) transition-colors duration-150 focus:outline-none focus:text-(--accent) group"
               >
-                {item.label}
+                <span>{item.label}</span>
+                <span
+                  className="absolute bottom-0 left-0 w-0 h-0.5 bg-(--accent) transition-all duration-200 group-hover:w-full motion-reduce:transition-none"
+                  aria-hidden="true"
+                />
               </a>
             ))}
           </nav>
@@ -91,7 +95,7 @@ export function Navbar() {
       {mobileMenuOpen && (
         <div
           id="mobile-menu"
-          className="md:hidden border-b border-(--border) bg-(--bg-secondary) px-4 pt-2 pb-6 space-y-3"
+          className="md:hidden border-b border-(--border) bg-(--bg-secondary) px-4 pt-2 pb-6 space-y-3 animate-hero-1 motion-reduce:animate-none"
         >
           <div className="flex flex-col space-y-2">
             {navItems.map((item) => (
