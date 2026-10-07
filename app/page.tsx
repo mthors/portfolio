@@ -6,11 +6,13 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { getFeaturedProjects } from "@/content/projects";
 import { getExperiences } from "@/content/experience";
 import { getSkillCategories } from "@/content/skills";
+import { getContactConfig } from "@/content/contact";
 
 export default function Home() {
   const featuredProjects = getFeaturedProjects();
   const experiences = getExperiences();
   const skillCategories = getSkillCategories();
+  const contact = getContactConfig();
 
   return (
     <div className="flex flex-col gap-24 py-12 md:py-20">
@@ -439,16 +441,32 @@ export default function Home() {
             </div>
 
             <div className="mt-8 flex flex-wrap justify-center gap-4">
-              <Button variant="primary" size="md" href="mailto:contact@thoriqisahal.dev" isExternal>
-                Send Email
+              <Button
+                variant="primary"
+                size="md"
+                href={contact.whatsapp.url}
+                isExternal
+                aria-label={contact.whatsapp.ariaLabel}
+              >
+                {contact.whatsapp.label}
               </Button>
               <Button
                 variant="secondary"
                 size="md"
-                href="https://github.com/thoriqisahal"
+                href={contact.email.url}
                 isExternal
+                aria-label={contact.email.ariaLabel}
               >
-                GitHub Profile
+                {contact.email.label}
+              </Button>
+              <Button
+                variant="secondary"
+                size="md"
+                href={contact.github.url}
+                isExternal
+                aria-label={contact.github.ariaLabel}
+              >
+                {contact.github.label}
               </Button>
             </div>
           </div>

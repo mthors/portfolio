@@ -14,14 +14,15 @@ describe("UI Primitives & Layout Shell", () => {
     expect(screen.getByRole("button", { name: /click me/i })).toBeInTheDocument();
 
     rerender(
-      <Button href="https://example.com" isExternal>
+      <Button href="https://example.com" isExternal aria-label="Custom Link Label">
         External Link
       </Button>
     );
-    const link = screen.getByRole("link", { name: /external link/i });
+    const link = screen.getByRole("link", { name: /custom link label/i });
     expect(link).toBeInTheDocument();
     expect(link).toHaveAttribute("target", "_blank");
     expect(link).toHaveAttribute("rel", "noopener noreferrer");
+    expect(link).toHaveAttribute("aria-label", "Custom Link Label");
   });
 
   it("renders Badge with appropriate variant", () => {

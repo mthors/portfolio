@@ -62,14 +62,15 @@ The application enforces a strict separation between client-side (public) and se
 
 ### Variables Table
 
-| Variable Name             | Exposure                     | Required in Prod     | Purpose & Example                                                                                                                          |
-| :------------------------ | :--------------------------- | :------------------- | :----------------------------------------------------------------------------------------------------------------------------------------- |
-| `NEXT_PUBLIC_SITE_URL`    | **Public** (Client & Server) | **Yes**              | Canonical site URL used for Open Graph tags, canonical links, and sitemaps.<br>Example: `https://portfolio.example.com`                    |
-| `NODE_ENV`                | **Server-side** (Runtime)    | Platform Managed     | Set automatically to `production` by the hosting platform during build.                                                                    |
-| `PORT`                    | **Server-side** (Container)  | Container only       | Listening port for standalone Node.js server inside Docker (`3000`). In managed serverless hosting, port binding is handled automatically. |
-| `HOSTNAME`                | **Server-side** (Container)  | Container only       | Network interface binding for Docker (`0.0.0.0`). Not required on managed platforms.                                                       |
-| `CONTACT_EMAIL_RECIPIENT` | **Server-side** (Runtime)    | No (Deferred to M6+) | Target email address for contact form submissions.                                                                                         |
-| `CONTACT_API_KEY`         | **Server-side** (Runtime)    | No (Deferred to M6+) | API token for transactional mail provider (e.g. Resend, SendGrid).                                                                         |
+| Variable Name                 | Exposure                     | Required in Prod     | Purpose & Example                                                                                                                          |
+| :---------------------------- | :--------------------------- | :------------------- | :----------------------------------------------------------------------------------------------------------------------------------------- |
+| `NEXT_PUBLIC_SITE_URL`        | **Public** (Client & Server) | **Yes**              | Canonical site URL used for Open Graph tags, canonical links, and sitemaps.<br>Example: `https://portfolio.example.com`                    |
+| `NEXT_PUBLIC_WHATSAPP_NUMBER` | **Public** (Client & Server) | No (Optional)        | International WhatsApp phone number (e.g. `6281234567890`) without `+` or spaces for direct chat link `https://wa.me/<number>`.            |
+| `NODE_ENV`                    | **Server-side** (Runtime)    | Platform Managed     | Set automatically to `production` by the hosting platform during build.                                                                    |
+| `PORT`                        | **Server-side** (Container)  | Container only       | Listening port for standalone Node.js server inside Docker (`3000`). In managed serverless hosting, port binding is handled automatically. |
+| `HOSTNAME`                    | **Server-side** (Container)  | Container only       | Network interface binding for Docker (`0.0.0.0`). Not required on managed platforms.                                                       |
+| `CONTACT_EMAIL_RECIPIENT`     | **Server-side** (Runtime)    | No (Deferred to M6+) | Target email address for contact form submissions.                                                                                         |
+| `CONTACT_API_KEY`             | **Server-side** (Runtime)    | No (Deferred to M6+) | API token for transactional mail provider (e.g. Resend, SendGrid).                                                                         |
 
 ### Public vs. Server-Side Security Rules
 

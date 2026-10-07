@@ -5,7 +5,10 @@ import { cn } from "@/lib/utils";
 export type ButtonVariant = "primary" | "secondary" | "outline" | "ghost";
 export type ButtonSize = "sm" | "md" | "lg";
 
-export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps
+  extends
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
+    Pick<React.AnchorHTMLAttributes<HTMLAnchorElement>, "aria-label"> {
   variant?: ButtonVariant;
   size?: ButtonSize;
   href?: string;
@@ -46,15 +49,25 @@ export function Button({
   );
 
   if (href) {
+    const anchorProps = {
+      "aria-label": props["aria-label"],
+    };
+
     if (isExternal) {
       return (
-        <a href={href} target="_blank" rel="noopener noreferrer" className={baseClasses}>
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={baseClasses}
+          {...anchorProps}
+        >
           {children}
         </a>
       );
     }
     return (
-      <Link href={href} className={baseClasses}>
+      <Link href={href} className={baseClasses} {...anchorProps}>
         {children}
       </Link>
     );

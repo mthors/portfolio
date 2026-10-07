@@ -33,9 +33,22 @@ test.describe("M0 Smoke Test", () => {
     const skillsSection = page.locator("#skills");
     await expect(skillsSection).toBeVisible();
 
-    // Verify Contact Section
+    // Verify Contact Section and CTAs (WhatsApp primary, Email, GitHub)
     const contactSection = page.locator("#contact");
     await expect(contactSection).toBeVisible();
+
+    const whatsappCta = contactSection.getByRole("link", { name: /WhatsApp/i });
+    await expect(whatsappCta).toBeVisible();
+    await expect(whatsappCta).toHaveAttribute("href", /^https:\/\/wa\.me\//);
+    await expect(whatsappCta).toHaveAttribute("target", "_blank");
+
+    const emailCta = contactSection.getByRole("link", { name: /Email/i });
+    await expect(emailCta).toBeVisible();
+    await expect(emailCta).toHaveAttribute("href", /^mailto:/);
+
+    const githubCta = contactSection.getByRole("link", { name: /GitHub/i });
+    await expect(githubCta).toBeVisible();
+    await expect(githubCta).toHaveAttribute("href", /^https:\/\/github\.com\//);
 
     // Verify Footer Shell
     const footer = page.locator("footer");
