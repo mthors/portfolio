@@ -1,7 +1,8 @@
 # Deployment Guide & Operations Manual
 
 **Project:** Moh Thoriqi Sahal Portfolio  
-**Milestone:** M8 — CI/CD  
+**Milestone:** M9 — Production Deployment Hardening  
+**Production Domain:** https://thorx.my.id  
 **Deployment Target:** Managed Next.js Platform (Vercel)
 
 ---
@@ -64,7 +65,7 @@ The application enforces a strict separation between client-side (public) and se
 
 | Variable Name                 | Exposure                     | Required in Prod     | Purpose & Example                                                                                                                          |
 | :---------------------------- | :--------------------------- | :------------------- | :----------------------------------------------------------------------------------------------------------------------------------------- |
-| `NEXT_PUBLIC_SITE_URL`        | **Public** (Client & Server) | **Yes**              | Canonical site URL used for Open Graph tags, canonical links, and sitemaps.<br>Example: `https://portfolio.example.com`                    |
+| `NEXT_PUBLIC_SITE_URL`        | **Public** (Client & Server) | **Yes**              | Canonical site URL used for Open Graph tags, canonical links, and sitemaps.<br>Production: `https://thorx.my.id`                           |
 | `NEXT_PUBLIC_WHATSAPP_NUMBER` | **Public** (Client & Server) | No (Optional)        | International WhatsApp phone number (e.g. `6281234567890`) without `+` or spaces for direct chat link `https://wa.me/<number>`.            |
 | `NODE_ENV`                    | **Server-side** (Runtime)    | Platform Managed     | Set automatically to `production` by the hosting platform during build.                                                                    |
 | `PORT`                        | **Server-side** (Container)  | Container only       | Listening port for standalone Node.js server inside Docker (`3000`). In managed serverless hosting, port binding is handled automatically. |
@@ -199,13 +200,13 @@ Once CI is green and the preview is approved, merge the Pull Request into `main`
 
 ## 7. Post-Deployment Verification Checklist
 
-Immediately following a production deployment, perform the following verification checks on the live URL:
+Immediately following a production deployment, perform the following verification checks on the live URL (`https://thorx.my.id`):
 
 - [ ] **Health Endpoint Check:**  
-      Navigate to `https://<YOUR-DOMAIN>/api/health` or run:
+      Navigate to `https://thorx.my.id/api/health` or run:
 
   ```bash
-  curl -i https://<YOUR-DOMAIN>/api/health
+  curl -i https://thorx.my.id/api/health
   ```
 
   Expected output: HTTP `200 OK` with JSON payload:
@@ -218,17 +219,37 @@ Immediately following a production deployment, perform the following verificatio
   }
   ```
 
+- [ ] **Security Headers Check:**  
+      Run:
+
+  ```bash
+  curl -I https://thorx.my.id
+  ```
+
+  Verify the presence of:
+  - `x-content-type-options: nosniff`
+  - `x-frame-options: DENY`
+  - `referrer-policy: strict-origin-when-cross-origin`
+  - `permissions-policy: camera=(), microphone=(), geolocation=()`
+  - `strict-transport-security: max-age=31536000`
+
+- [ ] **Search Engine Discovery (`robots.txt` & `sitemap.xml`):**
+
+  ```bash
+  curl -s https://thorx.my.id/robots.txt
+  curl -s https://thorx.my.id/sitemap.xml
+  ```
+
+  Confirm `robots.txt` points to `https://thorx.my.id/sitemap.xml`, and `sitemap.xml` returns valid XML containing the canonical production URL.
+
+- [ ] **Custom 404 Error Page:**  
+      Navigate to `https://thorx.my.id/unknown-route`. Confirm it renders the branded dark-themed 404 page with a functioning "Return Home" button.
+
 - [ ] **Homepage & SEO Metadata:**  
-      Verify the homepage loads with status `200`, title matches `Moh Thoriqi Sahal | IT Engineer & Software Developer`, and Open Graph tags reflect the configured `NEXT_PUBLIC_SITE_URL`.
+      Verify the homepage loads with status `200`, title matches `Moh Thoriqi Sahal | IT Engineer & Software Developer`, and Open Graph tags reflect `https://thorx.my.id`.
 
-- [ ] **Interactive Elements:**  
-      Test mobile navigation toggle, filter badges, and outbound external links.
-
-- [ ] **Browser Console:**  
-      Inspect the browser developer console for zero uncaught errors, failed asset loads, or hydration mismatches.
-
-- [ ] **Performance & Accessibility:**  
-      Run a quick Lighthouse audit to ensure performance, accessibility, best practices, and SEO scores meet project standards.
+- [ ] **Interactive Elements & Contact Links:**  
+      Test mobile navigation drawer, WhatsApp CTA (`https://wa.me/...`), Email link, and GitHub links.
 
 ---
 
@@ -260,37 +281,36 @@ To ensure the repository history matches production:
 
 ---
 
-## 9. Developer Setup Guide: Connecting Vercel (Manual Dashboard Steps)
+## 9. M9 Deployment Status & Responsibility Matrix
 
-Because platform-level authentication and dashboard configuration must not be performed from automated scripts, the project owner should perform the following one-time setup:
+### A. IMPLEMENTED IN CODE (Version-Controlled)
 
-### Prerequisites
+1. **Security Headers:** Configured in `next.config.ts` covering HSTS, clickjacking prevention (`X-Frame-Options`), MIME protection, referrer policy, and permissions restrictions.
+2. **SEO & Metadata:** Wired `NEXT_PUBLIC_SITE_URL` to `metadataBase`, Open Graph tags, Twitter card metadata, and canonical URL in `app/layout.tsx`.
+3. **Robots & Sitemap:** Native route handlers in `app/robots.ts` and `app/sitemap.ts` dynamically bound to `NEXT_PUBLIC_SITE_URL`.
+4. **Site Favicon:** Lightweight branded Next.js icon handler in `app/icon.tsx` styled to match the dark/cyan technical palette.
+5. **Error Handling:** Custom branded `app/not-found.tsx` (404) and client error boundary `app/error.tsx` (graceful recovery).
+6. **Health Endpoint:** Standalone `/api/health` Route Handler in `app/api/health/route.ts`.
+7. **Automated Testing:** E2E smoke tests in `tests/e2e/smoke.spec.ts` validating `/api/health`, `/robots.txt`, `/sitemap.xml`, and the 404 route.
 
-- A [Vercel](https://vercel.com/) account (sign in with GitHub).
-- Access to the GitHub repository.
+### B. MANUAL VERCEL & DNS CONFIGURATION (Performed by Project Owner)
 
-### Initial Setup Steps
+1. **Custom Domain Association:**
+   - In the Vercel Dashboard, go to **Settings** > **Domains**.
+   - Add `thorx.my.id` and optionally `www.thorx.my.id`.
+2. **DNS Records at Registrar / DNS Provider:**
+   - **Apex Domain (`thorx.my.id`):** Add an `A` record pointing to Vercel IP: `76.76.21.21`.
+   - **Subdomain (`www.thorx.my.id`):** Add a `CNAME` record pointing to `cname.vercel-dns.com`.
+   - Vercel automatically negotiates TLS certificates and configures HTTPS redirection.
+3. **Production Environment Variables:**
+   - In **Settings** > **Environment Variables**, verify:
+     - `NEXT_PUBLIC_SITE_URL` = `https://thorx.my.id` (Environment: Production)
+     - `NEXT_PUBLIC_WHATSAPP_NUMBER` = `<your-whatsapp-number>` (Environment: Production)
+4. **Lightweight Uptime Monitoring (Zero Code SDKs):**
+   - Configure a free external ping monitor (e.g., UptimeRobot, BetterStack, or GitHub Action schedule) targeting `https://thorx.my.id/api/health` every 5-10 minutes.
+   - Do not install heavy monitoring agent dependencies in the client bundle.
 
-1. **Import the Repository:**
-   - In the Vercel dashboard, click **Add New...** > **Project**.
-   - Select your GitHub repository (`portfolio`).
+### C. OPTIONAL FUTURE WORK (Milestone 10+)
 
-2. **Configure Project Settings:**
-   - **Framework Preset:** Select `Next.js` (auto-detected).
-   - **Root Directory:** Leave as `./`.
-   - **Build Command:** Leave as default (`next build` / `npm run build`).
-   - **Output Directory:** Leave as default (`.next`).
-   - **Install Command:** Leave as default (`npm install` or `npm ci`).
-
-3. **Configure Environment Variables:**
-   - In the **Environment Variables** section, add:
-     - `NEXT_PUBLIC_SITE_URL` = `https://<your-project>.vercel.app` (or custom production domain).
-     - Select environments: **Production**, **Preview**, **Development**.
-
-4. **Deploy:**
-   - Click **Deploy**.
-   - Vercel will fetch the repository, run `npm ci` and `next build`, and provide the live production URL.
-
-5. **Subsequent Releases:**
-   - Any future push to `main` will automatically build and deploy to production.
-   - Any pull request will automatically produce preview deployments.
+- **DevOps Laboratory (M10):** Deploy containerized version to Linux VPS using multi-stage `Dockerfile`, Docker Compose, and Caddy/Nginx reverse proxy.
+- **Dynamic Content & CMS (M11+):** Database integration deferred until editorial workflow or user management is explicitly required.

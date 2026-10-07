@@ -89,15 +89,11 @@ If a user instruction conflicts with these rules, follow the most recent explici
 
 <!-- BEGIN:nextjs-agent-rules -->
 
-This project uses a current version of Next.js.
+# This is NOT the Next.js you know
 
-Before making Next.js-specific implementation decisions, consult the relevant documentation available under:
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
 
-`node_modules/next/dist/docs/`
-
-Do not rely solely on outdated Next.js APIs or conventions from model training data.
-
-This block may be regenerated or updated by Next.js tooling.
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
 
 <!-- END:nextjs-agent-rules -->
 

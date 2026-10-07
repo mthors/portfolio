@@ -178,21 +178,24 @@ docker rm portfolio
 
 ---
 
-## Deployment
+## Deployment & Production Hardening
 
 The portfolio uses a two-track deployment model aligned with the project roadmap:
 
-1. **Managed Production Deployment (Current — M8/M9):**
+1. **Managed Production Deployment (Production — M9 Hardened):**
+   - **Production Domain:** [https://thorx.my.id](https://thorx.my.id)
    - Hosted on **Vercel** via native GitHub repository integration.
-   - Every push to `main` triggers a production release; Pull Requests receive isolated Preview deployments.
-   - Built directly on Next.js App Router serverless capabilities with zero server management overhead.
+   - Built directly on Next.js App Router with automatic edge CDN distribution and TLS encryption.
+   - Hardened with HTTP security headers (`X-Frame-Options`, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`, HSTS).
+   - Automated search engine indexing directives via `/robots.txt` and `/sitemap.xml`.
+   - Production health monitoring endpoint at `/api/health`.
    - Fast, zero-downtime instant rollbacks available from the dashboard.
 
 2. **Self-Hosted DevOps Lab (M10):**
    - The repository maintains an active multi-stage [Dockerfile](Dockerfile) validated by GitHub Actions.
    - Local container runs and future VPS/Docker Compose deployments run the same standalone Next.js server (`server.js`).
 
-For full operational steps, environment variables, verification checklists, and rollback instructions, see [DEPLOYMENT.md](DEPLOYMENT.md).
+For full operational steps, environment variables, DNS records, verification checklists, and rollback instructions, see [DEPLOYMENT.md](DEPLOYMENT.md).
 
 ---
 

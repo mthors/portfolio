@@ -1,7 +1,7 @@
 # Architecture Decision Record & Technical Strategy
 
 **Project:** Moh Thoriqi Sahal Portfolio  
-**Status:** M8 CI/CD Completed (Managed Deployment Architecture Configured)  
+**Status:** M9 Production Deployment Hardened (Domain: https://thorx.my.id)  
 **Owner:** Moh Thoriqi Sahal (IT Engineer & Software Developer)
 
 ---
