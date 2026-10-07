@@ -1,7 +1,7 @@
 # Architecture Decision Record & Technical Strategy
 
 **Project:** Moh Thoriqi Sahal Portfolio  
-**Status:** M0 Bootstrap Completed  
+**Status:** M8 CI/CD Completed (Managed Deployment Architecture Configured)  
 **Owner:** Moh Thoriqi Sahal (IT Engineer & Software Developer)
 
 ---
@@ -89,3 +89,22 @@ The automated GitHub Actions workflow (`.github/workflows/ci.yml`) validates eve
 8. Production Docker image build validation (`docker/build-push-action` with `push: false`, tagging `portfolio:ci`)
 
 The CI workflow currently validates that the repository can successfully produce its production Docker image. Container registry publishing (e.g. GitHub Packages / GHCR, Docker Hub) and automated server deployment are intentionally deferred to future milestones.
+
+---
+
+## 5. Managed Deployment Strategy (M8 / M9)
+
+To achieve high availability and rapid public delivery without introducing premature server management overhead, the production hosting follows a two-track architecture:
+
+1. **Managed Platform (Vercel):**
+   - **Role:** Production hosting tier for Milestone 8 and Milestone 9.
+   - **Rationale:** Next.js App Router native environment, zero server administration, global edge CDN distribution, automatic SSL certificate provisioning, and instant immutable rollbacks.
+   - **Integration:** Webhook-based integration directly linked to the GitHub repository. Pushes to `main` trigger automated production builds; Pull Requests trigger isolated preview environments.
+   - **Standalone Compatibility:** Vercel natively builds and runs the application without conflict with the `output: "standalone"` configuration in `next.config.ts`.
+   - **Zero Database:** The application remains strictly zero-database, relying on Git-versioned structured content.
+
+2. **Self-Hosted Container Laboratory (Docker / VPS — M10):**
+   - **Role:** DevOps learning lab for systems engineering, Linux administration, reverse proxying (Caddy/Nginx), and custom container orchestration.
+   - **Preservation:** The multi-stage production Dockerfile and CI Docker build pipeline remain active, tested, and ready for containerized deployment when Milestone 10 begins.
+
+For operational guidelines, environment variable specifications, and rollback procedures, refer to [DEPLOYMENT.md](DEPLOYMENT.md).

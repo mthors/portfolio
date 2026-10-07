@@ -64,6 +64,7 @@ portfolio/
 │   └── setup.ts               # Testing library setup
 ├── types/                     # TypeScript definitions & Zod schemas
 ├── ARCHITECTURE.md            # Architecture decision records
+├── DEPLOYMENT.md              # Deployment guide & operational manual
 ├── Dockerfile                 # Multi-stage production container
 ├── .dockerignore
 ├── .env.example               # Environment variables template
@@ -174,6 +175,24 @@ docker stop portfolio
 # Remove the container
 docker rm portfolio
 ```
+
+---
+
+## Deployment
+
+The portfolio uses a two-track deployment model aligned with the project roadmap:
+
+1. **Managed Production Deployment (Current — M8/M9):**
+   - Hosted on **Vercel** via native GitHub repository integration.
+   - Every push to `main` triggers a production release; Pull Requests receive isolated Preview deployments.
+   - Built directly on Next.js App Router serverless capabilities with zero server management overhead.
+   - Fast, zero-downtime instant rollbacks available from the dashboard.
+
+2. **Self-Hosted DevOps Lab (M10):**
+   - The repository maintains an active multi-stage [Dockerfile](Dockerfile) validated by GitHub Actions.
+   - Local container runs and future VPS/Docker Compose deployments run the same standalone Next.js server (`server.js`).
+
+For full operational steps, environment variables, verification checklists, and rollback instructions, see [DEPLOYMENT.md](DEPLOYMENT.md).
 
 ---
 
