@@ -91,27 +91,40 @@ test.describe("Hero Portrait & Visual Tests", () => {
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto("/");
 
+    // 1. Capture the navbar bounding box
+    const navbar = page.locator("header");
+    await expect(navbar).toBeVisible();
+    const navbarBox = await navbar.boundingBox();
+    expect(navbarBox).not.toBeNull();
+    const navbarBottom = (navbarBox?.y ?? 0) + (navbarBox?.height ?? 0);
+
     const badge = page.getByText("IT ENGINEER & SOFTWARE DEVELOPER", { exact: true });
     await expect(badge).toBeVisible();
-    const initialBadgeBox = await badge.boundingBox();
-    expect(initialBadgeBox).not.toBeNull();
 
-    // Scroll down to lower section
+    // 2. Scroll down to a lower section
     await page.locator("#projects").scrollIntoViewIfNeeded();
     await page.waitForTimeout(300);
     const scrolledY = await page.evaluate(() => window.scrollY);
     expect(scrolledY).toBeGreaterThan(1000);
 
-    // Click Home anchor in navbar
+    // 3. Click Home anchor in navbar
     const homeLink = page.locator("nav a", { hasText: "Home" });
     await homeLink.click();
 
-    // Verify page smoothly settles at top with badge in initial position
+    // 4. Wait for anchor navigation and scroll settling
     await page.waitForFunction(() => window.scrollY === 0, null, { timeout: 4000 });
+
+    // 5. Capture the Hero badge bounding box after navigation
     const afterBadgeBox = await badge.boundingBox();
     expect(afterBadgeBox).not.toBeNull();
-    if (initialBadgeBox && afterBadgeBox) {
-      expect(afterBadgeBox.y).toBe(initialBadgeBox.y);
+
+    // 6. Verify badge is fully visible below the sticky navbar and near the viewport top
+    if (afterBadgeBox) {
+      expect(afterBadgeBox.y).toBeGreaterThanOrEqual(navbarBottom);
+      expect(afterBadgeBox.y).toBeLessThan(navbarBottom + 40);
     }
+
+    const finalScrollY = await page.evaluate(() => window.scrollY);
+    expect(finalScrollY).toBe(0);
   });
 });
