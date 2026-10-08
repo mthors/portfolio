@@ -128,3 +128,90 @@ body {
 .animate-hero-6 {
   animation: heroFadeInUp 700ms cubic-bezier(0.16, 1, 0.3, 1) 160ms both;
 }
+
+/* -------------------------------------------------------------------------- */
+/* Hero Portrait Multi-Layer Seamless Blending Masks                          */
+/* -------------------------------------------------------------------------- */
+.hero-mask-horizontal {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(0, 0, 0, 0.1) 2%,
+    rgba(0, 0, 0, 0.5) 7%,
+    black 15%,
+    black 84%,
+    rgba(0, 0, 0, 0.5) 92%,
+    rgba(0, 0, 0, 0.1) 97%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(0, 0, 0, 0.1) 2%,
+    rgba(0, 0, 0, 0.5) 7%,
+    black 15%,
+    black 84%,
+    rgba(0, 0, 0, 0.5) 92%,
+    rgba(0, 0, 0, 0.1) 97%,
+    transparent 100%
+  );
+}
+
+.hero-mask-vertical {
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.15) 2%,
+    rgba(0, 0, 0, 0.6) 6%,
+    black 12%,
+    black 72%,
+    rgba(0, 0, 0, 0.6) 85%,
+    rgba(0, 0, 0, 0.15) 95%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.15) 2%,
+    rgba(0, 0, 0, 0.6) 6%,
+    black 12%,
+    black 72%,
+    rgba(0, 0, 0, 0.6) 85%,
+    rgba(0, 0, 0, 0.15) 95%,
+    transparent 100%
+  );
+}
+
+.hero-mask-vignette {
+  -webkit-mask-image: radial-gradient(
+    ellipse 85% 82% at 58% 36%,
+    black 48%,
+    rgba(0, 0, 0, 0.9) 68%,
+    rgba(0, 0, 0, 0.3) 86%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    ellipse 85% 82% at 58% 36%,
+    black 48%,
+    rgba(0, 0, 0, 0.9) 68%,
+    rgba(0, 0, 0, 0.3) 86%,
+    transparent 100%
+  );
+}
+
+.hero-portrait-mask {
+  -webkit-mask-image: radial-gradient(
+    ellipse 75% 72% at 58% 36%,
+    black 38%,
+    rgba(0, 0, 0, 0.9) 58%,
+    rgba(0, 0, 0, 0.35) 78%,
+    transparent 94%
+  );
+  mask-image: radial-gradient(
+    ellipse 75% 72% at 58% 36%,
+    black 38%,
+    rgba(0, 0, 0, 0.9) 58%,
+    rgba(0, 0, 0, 0.35) 78%,
+    transparent 94%
+  );
+}

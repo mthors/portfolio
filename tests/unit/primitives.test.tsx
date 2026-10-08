@@ -67,11 +67,14 @@ describe("UI Primitives & Layout Shell", () => {
     expect(screen.getByText(/Git-controlled/i)).toBeInTheDocument();
   });
 
-  it("renders HeroVisual ambient technical visual field", () => {
-    const { getByTestId } = render(<HeroVisual />);
+  it("renders HeroVisual ambient technical visual field and accessible portrait", () => {
+    const { getByTestId, getByAltText } = render(<HeroVisual />);
     const visual = getByTestId("hero-ambient-visual");
     expect(visual).toBeInTheDocument();
     expect(visual).toHaveAttribute("aria-hidden", "true");
+
+    const portrait = getByAltText("Portrait of Moh Thoriqi Sahal");
+    expect(portrait).toBeInTheDocument();
   });
 
   it("renders Reveal component with children and accessible motion fallback", () => {

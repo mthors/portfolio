@@ -18,10 +18,11 @@ test.describe("M0 Smoke Test", () => {
     const nav = page.locator("nav[aria-label='Main Navigation']");
     await expect(nav).toBeVisible();
 
-    // Verify Hero content & ambient technical visual
+    // Verify Hero content, ambient technical visual & portrait
     const heading = page.locator("h1");
     await expect(heading).toContainText(/Building Practical Solutions/i);
     await expect(page.getByTestId("hero-ambient-visual")).toBeAttached();
+    await expect(page.getByRole("img", { name: "Portrait of Moh Thoriqi Sahal" })).toBeVisible();
 
     // Verify About Section
     const aboutSection = page.locator("#about");

@@ -18,11 +18,11 @@ export default function Home() {
   const contact = getContactConfig();
 
   return (
-    <div className="flex flex-col gap-24 py-12 md:py-20">
+    <div className="flex flex-col gap-24 pt-2 md:pt-4 pb-12 md:pb-20">
       {/* 1. Hero Section */}
       <section id="hero" className="w-full">
         <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 xl:gap-2 items-start">
             {/* Left Column: Positioning & CTAs with Staggered Entrance */}
             <div className="lg:col-span-7 flex flex-col items-start">
               {/* Eyebrow Badge (0ms) */}
@@ -93,7 +93,7 @@ export default function Home() {
             </div>
 
             {/* Right Column: Ambient Technical Visual Field (160ms) */}
-            <div className="lg:col-span-5 flex items-center justify-center animate-hero-6">
+            <div className="lg:col-span-5 flex items-start justify-center lg:justify-start animate-hero-6 self-start lg:-ml-6 xl:-ml-8">
               <HeroVisual />
             </div>
           </div>
