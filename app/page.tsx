@@ -20,11 +20,13 @@ export default function Home() {
   return (
     <div className="flex flex-col gap-24 pt-2 md:pt-4 pb-12 md:pb-20">
       {/* 1. Hero Section */}
-      <section id="hero" className="w-full">
-        <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 xl:gap-2 items-start">
+      <section id="home" className="relative w-full overflow-hidden">
+        {/* Anchor alias for #hero backwards compatibility */}
+        <span id="hero" className="sr-only" aria-hidden="true" />
+        <Container className="relative">
+          <div className="relative flex flex-col lg:block items-start">
             {/* Left Column: Positioning & CTAs with Staggered Entrance */}
-            <div className="lg:col-span-7 flex flex-col items-start">
+            <div className="relative z-10 w-full max-w-2xl lg:max-w-3xl flex flex-col items-start">
               {/* Eyebrow Badge (0ms) */}
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-(--surface) border border-(--border) text-xs font-mono text-(--accent) mb-6 animate-hero-1">
                 <span className="h-2 w-2 rounded-full bg-(--accent) animate-pulse" />
@@ -92,16 +94,14 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right Column: Ambient Technical Visual Field (160ms) */}
-            <div className="lg:col-span-5 flex items-start justify-center lg:justify-start animate-hero-6 self-start lg:-ml-6 xl:-ml-8">
-              <HeroVisual />
-            </div>
+            {/* Ambient Technical Visual Field with Full Composition (160ms) */}
+            <HeroVisual />
           </div>
         </Container>
       </section>
 
       {/* 2. About Section */}
-      <section id="about" className="w-full scroll-mt-20">
+      <section id="about" className="w-full">
         <Container>
           <Reveal>
             <SectionHeading
@@ -185,7 +185,7 @@ export default function Home() {
       </section>
 
       {/* 3. Professional Experience Section */}
-      <section id="experience" className="w-full scroll-mt-20">
+      <section id="experience" className="w-full">
         <Container>
           <Reveal>
             <SectionHeading
@@ -260,7 +260,7 @@ export default function Home() {
       </section>
 
       {/* 4. Featured Projects Section */}
-      <section id="projects" className="w-full scroll-mt-20">
+      <section id="projects" className="w-full">
         <Container>
           <Reveal>
             <SectionHeading
@@ -275,7 +275,7 @@ export default function Home() {
       </section>
 
       {/* 5. Skills Section */}
-      <section id="skills" className="w-full scroll-mt-20">
+      <section id="skills" className="w-full">
         <Container>
           <Reveal>
             <SectionHeading
@@ -309,7 +309,7 @@ export default function Home() {
       </section>
 
       {/* 6. Contact Section */}
-      <section id="contact" className="w-full scroll-mt-20">
+      <section id="contact" className="w-full">
         <Container>
           <Reveal>
             <div className="rounded-2xl border border-(--border) bg-(--surface) p-8 sm:p-12 text-center max-w-3xl mx-auto hover:border-(--accent)/30 transition-colors duration-200">

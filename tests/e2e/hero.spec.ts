@@ -84,4 +84,34 @@ test.describe("Hero Portrait & Visual Tests", () => {
     const ambientBg = page.getByTestId("hero-ambient-visual");
     await expect(ambientBg).toBeAttached();
   });
+
+  test("restores hero top visual position without navbar overlap after clicking Home link", async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/");
+
+    const badge = page.getByText("IT ENGINEER & SOFTWARE DEVELOPER", { exact: true });
+    await expect(badge).toBeVisible();
+    const initialBadgeBox = await badge.boundingBox();
+    expect(initialBadgeBox).not.toBeNull();
+
+    // Scroll down to lower section
+    await page.locator("#projects").scrollIntoViewIfNeeded();
+    await page.waitForTimeout(300);
+    const scrolledY = await page.evaluate(() => window.scrollY);
+    expect(scrolledY).toBeGreaterThan(1000);
+
+    // Click Home anchor in navbar
+    const homeLink = page.locator("nav a", { hasText: "Home" });
+    await homeLink.click();
+
+    // Verify page smoothly settles at top with badge in initial position
+    await page.waitForFunction(() => window.scrollY === 0, null, { timeout: 4000 });
+    const afterBadgeBox = await badge.boundingBox();
+    expect(afterBadgeBox).not.toBeNull();
+    if (initialBadgeBox && afterBadgeBox) {
+      expect(afterBadgeBox.y).toBe(initialBadgeBox.y);
+    }
+  });
 });

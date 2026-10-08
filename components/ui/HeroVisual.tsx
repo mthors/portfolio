@@ -2,16 +2,19 @@ import React from "react";
 import Image from "next/image";
 
 /**
- * HeroVisual component featuring the approved portrait of Moh Thoriqi Sahal
+ * HeroVisual component featuring the full composition of Moh Thoriqi Sahal's portrait
  * integrated seamlessly into the dark navy technical environment.
  *
  * Architecture:
- * - Animated Background Layer (aria-hidden, z-0): Restrained ambient glows, faint grid, and subtle technical lines.
- * - Portrait Layer (z-10): Next.js Image with soft edge masking to dissolve into the background without boxes or borders.
+ * - Full Source Image Canvas (1402×1122): Preserves natural aspect ratio without aggressive cropping.
+ * - Spans substantially more width across the hero; dark negative space on the left sits behind hero text.
+ * - Portrait on the right remains dominant, sharp, and crisp at normal desktop viewing size.
+ * - Restrained Animated Technical Background Layer (aria-hidden, z-0): Ambient glows, faint coordinate geometry.
+ * - Left-side Readability Gradient (z-10): Smooth transition ensuring maximum text legibility without hard borders.
  */
 export function HeroVisual() {
   return (
-    <div className="relative w-full max-w-[560px] lg:max-w-none flex items-start justify-center lg:justify-start select-none">
+    <div className="w-full mt-10 lg:mt-0 lg:absolute lg:top-1/2 lg:-translate-y-1/2 lg:-right-4 xl:-right-8 2xl:-right-12 lg:w-[920px] xl:w-[1080px] 2xl:w-[1240px] flex items-center justify-center lg:justify-end select-none pointer-events-none z-0 animate-hero-6">
       {/* ------------------------------------------------------------------ */}
       {/* 1. Restrained Animated Technical Background Layer (aria-hidden)    */}
       {/* ------------------------------------------------------------------ */}
@@ -20,9 +23,9 @@ export function HeroVisual() {
         data-testid="hero-ambient-visual"
         className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden z-0"
       >
-        {/* Subtle ambient radial glow positioned directly behind the subject */}
-        <div className="absolute top-[18%] left-[24%] w-72 sm:w-96 lg:w-[500px] h-72 sm:h-96 lg:h-[500px] rounded-full bg-(--accent)/12 blur-3xl lg:blur-[120px] motion-reduce:animate-none animate-pulse [animation-duration:10s]" />
-        <div className="absolute top-[26%] left-[18%] w-60 sm:w-80 lg:w-[420px] h-60 sm:h-80 lg:h-[420px] rounded-full bg-blue-600/10 blur-2xl lg:blur-[95px] motion-reduce:animate-none animate-pulse [animation-duration:14s]" />
+        {/* Subtle ambient radial glow positioned behind the portrait */}
+        <div className="absolute top-[18%] right-[12%] w-72 sm:w-96 lg:w-[500px] h-72 sm:h-96 lg:h-[500px] rounded-full bg-(--accent)/12 blur-3xl lg:blur-[120px] motion-reduce:animate-none animate-pulse [animation-duration:10s]" />
+        <div className="absolute top-[26%] right-[16%] w-60 sm:w-80 lg:w-[420px] h-60 sm:h-80 lg:h-[420px] rounded-full bg-blue-600/10 blur-2xl lg:blur-[95px] motion-reduce:animate-none animate-pulse [animation-duration:14s]" />
 
         {/* Faint technical grid and peripheral geometry */}
         <svg
@@ -48,7 +51,7 @@ export function HeroVisual() {
           {/* Faint masked dot grid */}
           <rect width="600" height="600" fill="url(#hero-tech-dots)" mask="url(#hero-grid-mask)" />
 
-          {/* Outer subtle coordinate crosshairs (only at periphery, away from face) */}
+          {/* Outer subtle coordinate crosshairs */}
           <g stroke="var(--accent)" strokeOpacity="0.25" strokeWidth="1">
             <path d="M 80 80 L 80 90 M 80 80 L 90 80" />
             <path d="M 520 80 L 520 90 M 520 80 L 510 80" />
@@ -67,20 +70,25 @@ export function HeroVisual() {
       </div>
 
       {/* ------------------------------------------------------------------ */}
-      {/* 2. Portrait Layer (Integrated, Seamlessly Blended, Dominant Scale) */}
+      {/* 2. Full Source Image Composition Layer                             */}
       {/* ------------------------------------------------------------------ */}
-      <div className="relative z-10 w-full h-[420px] sm:h-[500px] md:h-[560px] lg:h-[660px] xl:h-[720px] flex items-start justify-center lg:justify-start hero-mask-horizontal">
-        <div className="relative w-full h-full hero-mask-vertical">
-          <div className="relative w-full h-full hero-mask-vignette">
-            <Image
-              src="/images/hero.png"
-              alt="Portrait of Moh Thoriqi Sahal"
-              fill
-              priority
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 600px, (max-width: 1280px) 50vw, 750px"
-              className="object-cover object-[62%_0%] lg:object-[58%_0%] pointer-events-none select-none transition-none"
-            />
-          </div>
+      <div className="relative z-10 w-full aspect-[1402/1122] flex items-center justify-center lg:justify-end hero-full-mask-horizontal">
+        <div className="relative w-full h-full hero-full-mask-vertical">
+          <Image
+            src="/images/hero.png"
+            alt="Portrait of Moh Thoriqi Sahal"
+            fill
+            priority
+            quality={85}
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, (max-width: 1280px) 75vw, 1200px"
+            className="object-contain object-center lg:object-right select-none pointer-events-none transition-none"
+          />
+
+          {/* Smooth left-side dark gradient ensuring pristine text contrast over image background */}
+          <div
+            aria-hidden="true"
+            className="hidden lg:block absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-(--bg-primary) via-(--bg-primary)/85 to-transparent pointer-events-none z-20"
+          />
         </div>
       </div>
     </div>

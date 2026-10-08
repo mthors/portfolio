@@ -1,6 +1,9 @@
 @import "tailwindcss";
 
 :root {
+  --navbar-height: 4rem;
+  --scroll-padding: calc(var(--navbar-height) + 1.0625rem);
+
   --bg-primary: #07111f;
   --bg-secondary: #0b1727;
   --surface: #101f31;
@@ -42,6 +45,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: var(--scroll-padding);
 }
 
 body {
@@ -213,5 +217,47 @@ body {
     rgba(0, 0, 0, 0.9) 58%,
     rgba(0, 0, 0, 0.35) 78%,
     transparent 94%
+  );
+}
+
+.hero-full-mask-horizontal {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(0, 0, 0, 0.3) 3%,
+    black 12%,
+    black 90%,
+    rgba(0, 0, 0, 0.4) 97%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(0, 0, 0, 0.3) 3%,
+    black 12%,
+    black 90%,
+    rgba(0, 0, 0, 0.4) 97%,
+    transparent 100%
+  );
+}
+
+.hero-full-mask-vertical {
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.4) 3%,
+    black 10%,
+    black 90%,
+    rgba(0, 0, 0, 0.4) 97%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.4) 3%,
+    black 10%,
+    black 90%,
+    rgba(0, 0, 0, 0.4) 97%,
+    transparent 100%
   );
 }
