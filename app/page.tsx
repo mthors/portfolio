@@ -47,14 +47,17 @@ export default function Home() {
                 </p>
 
                 <p className="mt-3 text-sm sm:text-base text-(--text-muted) leading-relaxed max-w-2xl">
-                  Combining day-to-day operations in a manufacturing plant with software development in
-                  C#, TypeScript, and SQL.
+                  Combining day-to-day operations in a manufacturing plant with software development
+                  in C#, TypeScript, and SQL.
                 </p>
 
                 {/* Guiding Philosophy Callout */}
                 <div className="mt-6 inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-lg bg-(--surface) border border-(--border) text-xs font-mono text-(--text-secondary)">
                   <span className="text-(--accent) font-bold">&bull;</span>
-                  <span>Core approach: Understand the problem, investigate the cause, and implement the appropriate fix.</span>
+                  <span>
+                    Core approach: Understand the problem, investigate the cause, and implement the
+                    appropriate fix.
+                  </span>
                 </div>
               </div>
 
@@ -119,9 +122,10 @@ export default function Home() {
                   Curiosity Since Childhood
                 </h3>
                 <p className="text-sm text-(--text-secondary) leading-relaxed">
-                  My interest in technology started when I first used computers at a local internet cafe.
-                  Exploring operating systems and software hands-on sparked an interest in how systems work
-                  beneath the surface, which led naturally to building tools and pursuing IT work.
+                  My interest in technology started when I first used computers at a local internet
+                  cafe. Exploring operating systems and software hands-on sparked an interest in how
+                  systems work beneath the surface, which led naturally to building tools and
+                  pursuing IT work.
                 </p>
               </div>
 
@@ -135,9 +139,9 @@ export default function Home() {
                 </h3>
                 <p className="text-sm text-(--text-secondary) leading-relaxed">
                   Since May 2022, I have worked as IT Staff in a manufacturing environment. My
-                  day-to-day responsibilities combine infrastructure support with business systems and software:
-                  maintaining plant networking, PCs, servers, CCTV, and printers, while supporting custom
-                  ERP workflows, SQL Server databases, and internal tooling.
+                  day-to-day responsibilities combine infrastructure support with business systems
+                  and software: maintaining plant networking, PCs, servers, CCTV, and printers,
+                  while supporting custom ERP workflows, SQL Server databases, and internal tooling.
                 </p>
               </div>
 
@@ -317,12 +321,13 @@ export default function Home() {
                 Interested in working together or discussing a software project?
               </h2>
               <p className="text-sm sm:text-base text-(--text-secondary) mt-3 max-w-xl mx-auto leading-relaxed">
-                Whether you want to discuss a software project, ask about my manufacturing IT experience,
-                or connect regarding an engineering role, feel free to reach out.
+                Whether you want to discuss a software project, ask about my manufacturing IT
+                experience, or connect regarding an engineering role, feel free to reach out.
               </p>
 
               <div className="mt-4 text-xs font-mono text-(--text-muted)">
-                Available via WhatsApp for direct messaging, email for project inquiries, or GitHub to inspect source code.
+                Available via WhatsApp for direct messaging, email for project inquiries, or GitHub
+                to inspect source code.
               </div>
 
               <div className="mt-8 flex flex-wrap justify-center gap-4">
