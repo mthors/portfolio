@@ -8,9 +8,9 @@ export const projects: Project[] = [
     featured: true,
     status: "completed",
     shortDescription:
-      "A lightweight desktop application built to eliminate manual daily, weekly, monthly, and yearly inventory recaps on constrained factory hardware.",
+      "A lightweight C# and SQLite desktop application built to automate periodic inventory recaps on constrained factory workstations.",
     description:
-      "Engineered to solve an immediate operational bottleneck: a colleague in storage and inventory needed to track items sold across days, weeks, months, and years, but the existing system lacked historical recap reporting. Rather than waiting for complex procurement, this tool was built for internal use to support daily inventory workflows. Designed specifically for low-spec hardware and Windows 7 environments, it avoids heavy web runtime dependencies by combining WinForms, an embedded SQLite database, a repository/service architecture, Excel onboarding, and automated unit testing.",
+      "Built to solve an immediate operational need: storage staff required structured summaries of sold items across custom date ranges, but the existing system lacked periodic recap reporting. Designed for low-spec hardware and Windows 7 environments without heavy web dependencies, the application combines WinForms, an embedded SQLite database, a repository and service pattern, Excel import validation, and automated unit tests.",
     image: "/images/projects/ldis-preview.svg",
     technologies: [
       "C#",
@@ -22,7 +22,7 @@ export const projects: Project[] = [
       "Automated Testing",
     ],
     highlights: [
-      "Built for an internal colleague needing daily, weekly, monthly, and yearly sales and stock recaps missing from existing software",
+      "Automates multi-period stock and sales recaps missing from legacy factory software",
       "Targeted Windows 7 backward compatibility for legacy workstations without heavy web runtime overhead",
       "Embedded local SQLite database ensuring reliable, independent offline operation on factory floor terminals",
       "Repository/service architecture with automated tests verifying inventory calculations and constraint rules",
@@ -43,10 +43,10 @@ export const projects: Project[] = [
     image: "/images/projects/outsole-catalog-preview.svg",
     technologies: ["React", "TypeScript", "Tailwind CSS", "Supabase", "PostgreSQL", "Git/GitHub"],
     highlights: [
-      "Demonstrates practical transition toward modern component-driven web application engineering",
+      "Modular component architecture built with React, TypeScript, and clean state separation",
       "Interactive product catalog with structured filtering and inquiry management",
       "Relational data model backed by PostgreSQL and Supabase",
-      "Git-driven development workflow with automated deployments and rigorous QA/debugging",
+      "Automated deployment pipeline and component testing backed by Git version control",
     ],
     githubUrl: "https://github.com/thoriqisahal/outsole-catalog",
     liveUrl: "https://outsole-catalog.demo",
@@ -58,9 +58,9 @@ export const projects: Project[] = [
     featured: true,
     status: "active",
     shortDescription:
-      "Operational case study managing mission-critical IT infrastructure, enterprise ERP, and business workflows in a manufacturing plant.",
+      "Operational case study covering plant IT infrastructure, ERP maintenance, database troubleshooting, and reporting workflows.",
     description:
-      "A comprehensive operational case study reflecting real-world IT responsibilities in an active manufacturing facility. Covers hands-on administration across Windows Server, plant networking, shop-floor PCs, CCTV, and network printers, alongside business applications including custom legacy ERP, Microsoft SQL Server, Crystal Reports, and administrative systems. Emphasizes an investigative problem-solving methodology: diagnosing root causes across hardware, network, database, application, and workflow layers.",
+      "An operational case study reflecting hands-on IT Staff responsibilities in an active manufacturing facility. Covers hardware maintenance, plant networking, shop-floor PCs, CCTV, and network printers, alongside business applications including custom ERP systems, Microsoft SQL Server, and Crystal Reports. Details an investigative troubleshooting methodology across hardware, network, database, application, and workflow layers.",
     image: "/images/projects/manufacturing-it-preview.svg",
     technologies: [
       "SQL Server",

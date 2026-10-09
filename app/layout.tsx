@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     template: "%s | Moh Thoriqi Sahal",
   },
   description:
-    "Production portfolio for Moh Thoriqi Sahal. Building practical solutions for real-world operations across software development, IT infrastructure, and business systems.",
+    "Portfolio of Moh Thoriqi Sahal: IT Staff and Software Developer. Building practical desktop tools, modern web applications, and solving operational challenges in manufacturing IT.",
   keywords: [
     "Moh Thoriqi Sahal",
     "IT Engineer",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Moh Thoriqi Sahal | IT Engineer & Software Developer",
     description:
-      "Production portfolio for Moh Thoriqi Sahal. Building practical solutions for real-world operations across software development, IT infrastructure, and business systems.",
+      "Portfolio of Moh Thoriqi Sahal: IT Staff and Software Developer. Building practical desktop tools, modern web applications, and solving operational challenges in manufacturing IT.",
     url: siteUrl,
     siteName: "Moh Thoriqi Sahal Portfolio",
     locale: "en_US",
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Moh Thoriqi Sahal | IT Engineer & Software Developer",
     description:
-      "Production portfolio for Moh Thoriqi Sahal. Building practical solutions for real-world operations across software development, IT infrastructure, and business systems.",
+      "Portfolio of Moh Thoriqi Sahal: IT Staff and Software Developer. Building practical desktop tools, modern web applications, and solving operational challenges in manufacturing IT.",
   },
 };
 

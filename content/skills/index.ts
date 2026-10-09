@@ -22,7 +22,7 @@ export const skillCategories: SkillCategory[] = [
       "SQLite",
       "PostgreSQL / Supabase",
       "Crystal Reports",
-      "Excel Data Workflows",
+      "Excel & Data Processing",
     ],
   },
   {
@@ -33,14 +33,14 @@ export const skillCategories: SkillCategory[] = [
       "Networking & Cabling",
       "PC Hardware Support",
       "CCTV & Peripherals",
-      "Docker (Containers)",
+      "Docker",
       "Git / GitHub",
     ],
   },
   {
     title: "Engineering Practices",
     skills: [
-      "REST / API Concepts",
+      "REST APIs",
       "Automated Testing",
       "Vitest",
       "Playwright",

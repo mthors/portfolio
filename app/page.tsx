@@ -47,15 +47,14 @@ export default function Home() {
                 </p>
 
                 <p className="mt-3 text-sm sm:text-base text-(--text-muted) leading-relaxed max-w-2xl">
-                  Hands-on experience across infrastructure, troubleshooting, business applications,
-                  databases, and software development, with a growing focus on modern software
-                  engineering.
+                  Combining day-to-day operations in a manufacturing plant with software development in
+                  C#, TypeScript, and SQL.
                 </p>
 
                 {/* Guiding Philosophy Callout */}
                 <div className="mt-6 inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-lg bg-(--surface) border border-(--border) text-xs font-mono text-(--text-secondary)">
                   <span className="text-(--accent) font-bold">&bull;</span>
-                  <span>Philosophy: Understand the problem before choosing the technology.</span>
+                  <span>Core approach: Understand the problem, investigate the cause, and implement the appropriate fix.</span>
                 </div>
               </div>
 
@@ -79,17 +78,17 @@ export default function Home() {
                 </div>
                 <div>
                   <div className="text-xl sm:text-2xl font-bold font-mono text-(--accent)">
-                    Broad Scope
+                    Operations &amp; Code
                   </div>
                   <div className="text-xs text-(--text-muted) mt-1">
-                    Hardware, DBs, Apps &amp; Code
+                    Systems, Databases &amp; Tooling
                   </div>
                 </div>
                 <div>
                   <div className="text-xl sm:text-2xl font-bold font-mono text-(--success)">
-                    Investigative
+                    Methodology
                   </div>
-                  <div className="text-xs text-(--text-muted) mt-1">Root-Cause Troubleshooting</div>
+                  <div className="text-xs text-(--text-muted) mt-1">Root-Cause Problem Solving</div>
                 </div>
               </div>
             </div>
@@ -107,7 +106,7 @@ export default function Home() {
             <SectionHeading
               eyebrow="ABOUT &amp; PHILOSOPHY"
               title="Curiosity, Systems, and Problem Solving"
-              description="From early days exploring technology at an internet café to managing complex operational systems in manufacturing, my focus has always been understanding how things work and building tools that make work easier."
+              description="From early curiosity using computers at an internet cafe to supporting daily manufacturing operations, my focus is understanding how systems work and building tools that solve practical problems."
             />
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -120,10 +119,9 @@ export default function Home() {
                   Curiosity Since Childhood
                 </h3>
                 <p className="text-sm text-(--text-secondary) leading-relaxed">
-                  My interest in technology started early, using computers at a local internet café.
-                  That sparked an ongoing fascination not only with computers, but with technology
-                  broadly: software, programming, cars, phones, cameras, hardware, and gaming
-                  graphics. I have always enjoyed understanding how systems work under the surface.
+                  My interest in technology started when I first used computers at a local internet cafe.
+                  Exploring operating systems and software hands-on sparked an interest in how systems work
+                  beneath the surface, which led naturally to building tools and pursuing IT work.
                 </p>
               </div>
 
@@ -137,10 +135,9 @@ export default function Home() {
                 </h3>
                 <p className="text-sm text-(--text-secondary) leading-relaxed">
                   Since May 2022, I have worked as IT Staff in a manufacturing environment. My
-                  actual responsibilities extend far beyond basic IT support: working across
-                  hardware, Windows systems, servers, plant networking, CCTV, printers, custom ERP
-                  applications, SQL Server databases, websites, troubleshooting, and internal
-                  administrative tooling.
+                  day-to-day responsibilities combine infrastructure support with business systems and software:
+                  maintaining plant networking, PCs, servers, CCTV, and printers, while supporting custom
+                  ERP workflows, SQL Server databases, and internal tooling.
                 </p>
               </div>
 
@@ -153,10 +150,10 @@ export default function Home() {
                   Investigative Mindset
                 </h3>
                 <p className="text-sm text-(--text-secondary) leading-relaxed">
-                  In an active manufacturing plant, technical issues rarely arrive neatly
-                  categorized. My approach is investigative: observe the problem, identify possible
-                  failure causes, test hypotheses, evaluate fixes, and determine the root cause.
-                  Understand the problem before choosing the technology.
+                  In an active factory, technical issues span multiple layers at once. My approach
+                  is systematic: inspect the issue, isolate likely failure points across hardware or
+                  software, test solutions, and verify that the root cause is resolved rather than
+                  applying temporary patches.
                 </p>
               </div>
             </div>
@@ -168,12 +165,12 @@ export default function Home() {
                   Current Focus &amp; Direction
                 </div>
                 <div className="text-sm text-(--text-primary) font-medium mt-1">
-                  Moving deeper into professional software engineering and remote software
-                  development.
+                  Deepening practical software engineering across desktop and modern web
+                  applications.
                 </div>
                 <div className="text-xs text-(--text-muted) mt-0.5">
-                  Applying practical operational discipline, problem-first thinking, and modern web
-                  technologies.
+                  Applying operational reliability, database discipline, and modern development
+                  workflows to software projects.
                 </div>
               </div>
               <Button variant="outline" size="sm" href="#contact">
@@ -320,12 +317,12 @@ export default function Home() {
                 Interested in working together or discussing a software project?
               </h2>
               <p className="text-sm sm:text-base text-(--text-secondary) mt-3 max-w-xl mx-auto leading-relaxed">
-                I&apos;d be happy to hear from you. Open to conversations about practical software
-                development, IT infrastructure, and new engineering opportunities.
+                Whether you want to discuss a software project, ask about my manufacturing IT experience,
+                or connect regarding an engineering role, feel free to reach out.
               </p>
 
               <div className="mt-4 text-xs font-mono text-(--text-muted)">
-                &ldquo;Understand the problem before choosing the technology.&rdquo;
+                Available via WhatsApp for direct messaging, email for project inquiries, or GitHub to inspect source code.
               </div>
 
               <div className="mt-8 flex flex-wrap justify-center gap-4">

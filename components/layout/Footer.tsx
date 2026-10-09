@@ -22,7 +22,7 @@ export function Footer() {
             <span className="hidden sm:inline">&bull;</span>
             <span className="flex items-center gap-1.5">
               <span className="h-2 w-2 rounded-full bg-(--success) inline-block"></span>
-              Git-controlled &bull; V1 Architecture
+              Git-controlled &bull; Built with Next.js &amp; TypeScript
             </span>
           </div>
         </div>
