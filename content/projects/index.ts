@@ -11,7 +11,7 @@ export const projects: Project[] = [
       "A lightweight C# and SQLite desktop application built to automate periodic inventory recaps on constrained factory workstations.",
     description:
       "Built to solve an immediate operational need: storage staff required structured summaries of sold items across custom date ranges, but the existing system lacked periodic recap reporting. Designed for low-spec hardware and Windows 7 environments without heavy web dependencies, the application combines WinForms, an embedded SQLite database, a repository and service pattern, Excel import validation, and automated unit tests.",
-    image: "/images/projects/ldis-preview.svg",
+    image: "/images/projects/ldis.jpg",
     technologies: [
       "C#",
       ".NET Framework",
@@ -28,7 +28,7 @@ export const projects: Project[] = [
       "Repository/service architecture with automated tests verifying inventory calculations and constraint rules",
       "Excel import workflow to onboard product catalogs and inventory lists directly",
     ],
-    githubUrl: "https://github.com/thoriqisahal/ldis",
+    githubUrl: "https://github.com/mthors/ldis-ode-inventory",
   },
   {
     slug: "outsole-catalog",

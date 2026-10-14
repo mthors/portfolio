@@ -50,3 +50,6 @@ next-env.d.ts
 #custom ignore (Currently disabled)
 antislop.md
 /skills
+
+#codegraph
+.codegraph/

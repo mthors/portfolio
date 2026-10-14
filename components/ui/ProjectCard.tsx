@@ -8,13 +8,15 @@ interface ProjectCardProps {
 }
 
 export function ProjectCard({ project }: ProjectCardProps) {
+  const imageSrc = project.thumbnail || project.image;
+
   return (
     <article className="group flex flex-col h-full rounded-xl border border-(--border) bg-(--surface) overflow-hidden hover:border-(--accent)/50 hover:-translate-y-1 transition-all duration-200 focus-within:border-(--accent)/60">
       {/* 1. Thumbnail Area with Intentional Technical Placeholder */}
       <div className="relative w-full aspect-16/10 bg-(--bg-primary) border-b border-(--border) overflow-hidden flex items-center justify-center">
-        {project.thumbnail ? (
+        {imageSrc ? (
           <Image
-            src={project.thumbnail}
+            src={imageSrc}
             alt={`${project.title} preview`}
             fill
             sizes="(max-width: 768px) 85vw, (max-width: 1200px) 45vw, 380px"
