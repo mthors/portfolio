@@ -19,11 +19,6 @@ export function Footer() {
 
           <div className="flex flex-col sm:flex-row items-center gap-4 text-xs font-mono text-(--text-muted)">
             <span>&copy; {currentYear} Moh Thoriqi Sahal. All rights reserved.</span>
-            <span className="hidden sm:inline">&bull;</span>
-            <span className="flex items-center gap-1.5">
-              <span className="h-2 w-2 rounded-full bg-(--success) inline-block"></span>
-              Git-controlled &bull; Built with Next.js &amp; TypeScript
-            </span>
           </div>
         </div>
       </Container>

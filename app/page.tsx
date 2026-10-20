@@ -27,12 +27,6 @@ export default function Home() {
           <div className="relative flex flex-col lg:block items-start">
             {/* Left Column: Positioning & CTAs with Staggered Entrance */}
             <div className="relative z-10 w-full max-w-2xl lg:max-w-3xl flex flex-col items-start">
-              {/* Eyebrow Badge (0ms) */}
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-(--surface) border border-(--border) text-xs font-mono text-(--accent) mb-6 animate-hero-1">
-                <span className="h-2 w-2 rounded-full bg-(--accent) animate-pulse" />
-                IT ENGINEER &amp; SOFTWARE DEVELOPER
-              </div>
-
               {/* Heading (80ms) */}
               <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-(--text-primary) leading-[1.15] animate-hero-2">
                 Building Practical Solutions for{" "}
@@ -47,18 +41,9 @@ export default function Home() {
                 </p>
 
                 <p className="mt-3 text-sm sm:text-base text-(--text-muted) leading-relaxed max-w-2xl">
-                  Combining day-to-day operations in a manufacturing plant with software development
-                  in C#, TypeScript, and SQL.
+                  Combining day-to-day IT operations in a manufacturing plant with software development
+                  in C#, TypeScript, Javascript, Python and SQL.
                 </p>
-
-                {/* Guiding Philosophy Callout */}
-                <div className="mt-6 inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-lg bg-(--surface) border border-(--border) text-xs font-mono text-(--text-secondary)">
-                  <span className="text-(--accent) font-bold">&bull;</span>
-                  <span>
-                    Core approach: Understand the problem, investigate the cause, and implement the
-                    appropriate fix.
-                  </span>
-                </div>
               </div>
 
               {/* CTAs (240ms) */}
@@ -116,10 +101,10 @@ export default function Home() {
               {/* Card 1: Early Curiosity */}
               <div className="rounded-xl border border-(--border) bg-(--surface) p-6 flex flex-col hover:border-(--accent)/40 hover:-translate-y-0.5 hover:shadow-md hover:shadow-black/20 transition-all duration-200">
                 <div className="text-xs font-mono text-(--accent) uppercase tracking-wider mb-2">
-                  01 / Background
+                  My Background
                 </div>
                 <h3 className="text-lg font-bold text-(--text-primary) mb-3">
-                  Curiosity Since Childhood
+                  Curiosity in Technology
                 </h3>
                 <p className="text-sm text-(--text-secondary) leading-relaxed">
                   My interest in technology started when I first used computers at a local internet
@@ -132,7 +117,7 @@ export default function Home() {
               {/* Card 2: Manufacturing Environment */}
               <div className="rounded-xl border border-(--border) bg-(--surface) p-6 flex flex-col hover:border-(--accent)/40 hover:-translate-y-0.5 hover:shadow-md hover:shadow-black/20 transition-all duration-200">
                 <div className="text-xs font-mono text-(--accent) uppercase tracking-wider mb-2">
-                  02 / Real-World Role
+                  Real-World Role
                 </div>
                 <h3 className="text-lg font-bold text-(--text-primary) mb-3">
                   Hands-On Manufacturing IT
@@ -148,7 +133,7 @@ export default function Home() {
               {/* Card 3: Investigative Mindset */}
               <div className="rounded-xl border border-(--border) bg-(--surface) p-6 flex flex-col hover:border-(--accent)/40 hover:-translate-y-0.5 hover:shadow-md hover:shadow-black/20 transition-all duration-200">
                 <div className="text-xs font-mono text-(--accent) uppercase tracking-wider mb-2">
-                  03 / Methodology
+                  Methodology
                 </div>
                 <h3 className="text-lg font-bold text-(--text-primary) mb-3">
                   Investigative Mindset

@@ -32,7 +32,7 @@ export const projects: Project[] = [
   },
   {
     slug: "outsole-catalog",
-    title: "Outsole Catalog & Digital Showcase",
+    title: "B2B Outsole Catalog & Digital Showcase",
     category: "Web Application",
     featured: true,
     status: "active",
@@ -40,7 +40,7 @@ export const projects: Project[] = [
       "Modern full-stack web application showcasing outsole products with structured querying and responsive interface.",
     description:
       "A project demonstrating practical modern web application development, transitioning from desktop tooling to modern browser architectures. Built with React, TypeScript, and Tailwind CSS on the frontend, backed by PostgreSQL and Supabase for structured product data management. Developed with Git-based version control, component-level testing, and automated deployment pipelines.",
-    image: "/images/projects/outsole-catalog-preview.svg",
+    image: "/images/projects/b2boutsole.jpg",
     technologies: ["React", "TypeScript", "Tailwind CSS", "Supabase", "PostgreSQL", "Git/GitHub"],
     highlights: [
       "Modular component architecture built with React, TypeScript, and clean state separation",
@@ -48,7 +48,7 @@ export const projects: Project[] = [
       "Relational data model backed by PostgreSQL and Supabase",
       "Automated deployment pipeline and component testing backed by Git version control",
     ],
-    githubUrl: "https://github.com/thoriqisahal/outsole-catalog",
+    githubUrl: "https://github.com/mthors/outsole-webapp",
     liveUrl: "https://outsole-catalog.demo",
   },
   {
@@ -61,7 +61,7 @@ export const projects: Project[] = [
       "Operational case study covering plant IT infrastructure, ERP maintenance, database troubleshooting, and reporting workflows.",
     description:
       "An operational case study reflecting hands-on IT Staff responsibilities in an active manufacturing facility. Covers hardware maintenance, plant networking, shop-floor PCs, CCTV, and network printers, alongside business applications including custom ERP systems, Microsoft SQL Server, and Crystal Reports. Details an investigative troubleshooting methodology across hardware, network, database, application, and workflow layers.",
-    image: "/images/projects/manufacturing-it-preview.svg",
+    image: "/images/projects/manufacture.jpg",
     technologies: [
       "SQL Server",
       "ERP Systems",

@@ -24,7 +24,7 @@ export default function Icon() {
         fontFamily: "monospace",
       }}
     >
-      TS
+      M
     </div>,
     {
       ...size,

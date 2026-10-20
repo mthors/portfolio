@@ -47,6 +47,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# Tests folder
+/tests
+
 #custom ignore (Currently disabled)
 antislop.md
 /skills

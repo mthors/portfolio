@@ -151,10 +151,10 @@ export function ProjectCard({ project }: ProjectCardProps) {
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs font-mono text-(--text-muted) hover:text-(--text-primary) focus-visible:outline-none focus-visible:underline"
+              className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-(--accent) hover:text-(--accent-hover) focus-visible:outline-none focus-visible:underline"
               aria-label={`View GitHub repository for ${project.title}`}
             >
-              Source &nearr;
+              View Source
             </a>
           )}
         </div>

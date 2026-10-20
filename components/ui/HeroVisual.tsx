@@ -1,20 +1,10 @@
 import React from "react";
 import Image from "next/image";
 
-/**
- * HeroVisual component featuring the full composition of Moh Thoriqi Sahal's portrait
- * integrated seamlessly into the dark navy technical environment.
- *
- * Architecture:
- * - Full Source Image Canvas (1402×1122): Preserves natural aspect ratio without aggressive cropping.
- * - Spans substantially more width across the hero; dark negative space on the left sits behind hero text.
- * - Portrait on the right remains dominant, sharp, and crisp at normal desktop viewing size.
- * - Restrained Animated Technical Background Layer (aria-hidden, z-0): Ambient glows, faint coordinate geometry.
- * - Left-side Readability Gradient (z-10): Smooth transition ensuring maximum text legibility without hard borders.
- */
+
 export function HeroVisual() {
   return (
-    <div className="w-full mt-10 lg:mt-0 lg:absolute lg:top-1/2 lg:-translate-y-1/2 lg:-right-4 lg:w-[920px] flex items-center justify-center lg:justify-end select-none pointer-events-none z-0 animate-hero-6">
+    <div className="w-full mt-10 lg:mt-13 lg:absolute lg:top-1/2 lg:-translate-y-1/2 lg:-right-4 lg:w-[920px] flex items-center justify-center lg:justify-end select-none pointer-events-none z-0 animate-hero-6">
       {/* ------------------------------------------------------------------ */}
       {/* 1. Restrained Animated Technical Background Layer (aria-hidden)    */}
       {/* ------------------------------------------------------------------ */}
