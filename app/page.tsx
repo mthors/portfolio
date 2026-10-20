@@ -41,8 +41,8 @@ export default function Home() {
                 </p>
 
                 <p className="mt-3 text-sm sm:text-base text-(--text-muted) leading-relaxed max-w-2xl">
-                  Combining day-to-day IT operations in a manufacturing plant with software development
-                  in C#, TypeScript, Javascript, Python and SQL.
+                  Combining day-to-day IT operations in a manufacturing plant with software
+                  development in C#, TypeScript, Javascript, Python and SQL.
                 </p>
               </div>
 

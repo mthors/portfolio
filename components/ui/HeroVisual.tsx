@@ -1,7 +1,6 @@
 import React from "react";
 import Image from "next/image";
 
-
 export function HeroVisual() {
   return (
     <div className="w-full mt-10 lg:mt-13 lg:absolute lg:top-1/2 lg:-translate-y-1/2 lg:-right-4 lg:w-[920px] flex items-center justify-center lg:justify-end select-none pointer-events-none z-0 animate-hero-6">
