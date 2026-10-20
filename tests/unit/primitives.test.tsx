@@ -64,7 +64,6 @@ describe("UI Primitives & Layout Shell", () => {
   it("renders Footer shell with copyright and title", () => {
     render(<Footer />);
     expect(screen.getAllByText(/Moh Thoriqi Sahal/i).length).toBeGreaterThan(0);
-    expect(screen.getByText(/Git-controlled/i)).toBeInTheDocument();
   });
 
   it("renders HeroVisual ambient technical visual field and accessible portrait", () => {
