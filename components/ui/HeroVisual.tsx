@@ -14,7 +14,7 @@ import Image from "next/image";
  */
 export function HeroVisual() {
   return (
-    <div className="w-full mt-10 lg:mt-0 lg:absolute lg:top-1/2 lg:-translate-y-1/2 lg:-right-4 xl:-right-8 2xl:-right-12 lg:w-[920px] xl:w-[1080px] 2xl:w-[1240px] flex items-center justify-center lg:justify-end select-none pointer-events-none z-0 animate-hero-6">
+    <div className="w-full mt-10 lg:mt-0 lg:absolute lg:top-1/2 lg:-translate-y-1/2 lg:-right-4 lg:w-[920px] flex items-center justify-center lg:justify-end select-none pointer-events-none z-0 animate-hero-6">
       {/* ------------------------------------------------------------------ */}
       {/* 1. Restrained Animated Technical Background Layer (aria-hidden)    */}
       {/* ------------------------------------------------------------------ */}
