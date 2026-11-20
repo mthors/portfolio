@@ -38,8 +38,12 @@ test.describe("M0 Smoke Test", () => {
     await expect(page.getByTestId("project-rail")).toBeVisible();
     await expect(page.getByRole("button", { name: "Previous projects" })).toBeVisible();
     await expect(page.getByRole("button", { name: "Next projects" })).toBeVisible();
-    await expect(page.getByText(/Lightweight Desktop Inventory System/i)).toBeVisible();
-    await expect(page.getByText(/Outsole Catalog/i)).toBeVisible();
+    await expect(
+      page.getByRole("button", { name: /pause project carousel auto-scroll/i })
+    ).toBeVisible();
+    await expect(page.getByText(/Lightweight Desktop Inventory System/i).first()).toBeVisible();
+    await expect(page.getByText(/Outsole Catalog/i).first()).toBeVisible();
+    await expect(page.getByText(/Honda Satrya Dealer Group/i).first()).toBeVisible();
 
     // Verify Skills Section
     const skillsSection = page.locator("#skills");

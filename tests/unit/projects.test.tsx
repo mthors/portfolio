@@ -1,6 +1,6 @@
 import React from "react";
-import { describe, it, expect } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { describe, it, expect, vi, beforeEach } from "vitest";
+import { render, screen, fireEvent } from "@testing-library/react";
 import { ProjectCard } from "@/components/ui/ProjectCard";
 import { ProjectRail } from "@/components/ui/ProjectRail";
 import { getFeaturedProjects } from "@/content/projects";
@@ -74,26 +74,122 @@ describe("ProjectCard Component", () => {
 });
 
 describe("ProjectRail Component", () => {
+  beforeEach(() => {
+    // Provide standard matchMedia implementation
+    window.matchMedia = vi.fn().mockImplementation((query: string) => ({
+      matches: false,
+      media: query,
+      onchange: null,
+      addListener: vi.fn(),
+      removeListener: vi.fn(),
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+      dispatchEvent: vi.fn(),
+    }));
+  });
+
   it("renders all featured projects in horizontal rail", () => {
     const featured = getFeaturedProjects();
     render(<ProjectRail projects={featured} />);
 
-    // All current projects must render
-    expect(screen.getByText(/Lightweight Desktop Inventory System/i)).toBeInTheDocument();
-    expect(screen.getByText(/Outsole Catalog/i)).toBeInTheDocument();
-    expect(screen.getByText(/Manufacturing IT & Systems Operations/i)).toBeInTheDocument();
-    expect(screen.getByText(/Honda Satrya Dealer Group/i)).toBeInTheDocument();
+    // All current projects must render in the primary track
+    expect(screen.getAllByText(/Lightweight Desktop Inventory System/i)[0]).toBeInTheDocument();
+    expect(screen.getAllByText(/Outsole Catalog/i)[0]).toBeInTheDocument();
+    expect(screen.getAllByText(/Manufacturing IT & Systems Operations/i)[0]).toBeInTheDocument();
+    expect(screen.getAllByText(/Honda Satrya Dealer Group/i)[0]).toBeInTheDocument();
   });
 
-  it("renders navigation controls with accessible labels", () => {
+  it("renders primary accessible cards and clone cards with inert/aria-hidden semantics", () => {
+    const featured = getFeaturedProjects();
+    render(<ProjectRail projects={featured} />);
+
+    const primaryItems = screen.getAllByTestId("primary-project-item");
+    const cloneItems = screen.getAllByTestId("clone-project-item");
+
+    expect(primaryItems.length).toBe(featured.length);
+    expect(cloneItems.length).toBe(featured.length);
+    cloneItems.forEach((item) => {
+      expect(item).toHaveAttribute("aria-hidden", "true");
+      expect(item).toHaveAttribute("inert");
+    });
+  });
+
+  it("renders navigation controls with accessible labels including pause/resume", () => {
     const featured = getFeaturedProjects();
     render(<ProjectRail projects={featured} />);
 
     const prevBtn = screen.getByRole("button", { name: "Previous projects" });
     const nextBtn = screen.getByRole("button", { name: "Next projects" });
+    const pauseBtn = screen.getByRole("button", { name: /pause project carousel auto-scroll/i });
 
     expect(prevBtn).toBeInTheDocument();
     expect(nextBtn).toBeInTheDocument();
+    expect(pauseBtn).toBeInTheDocument();
+    expect(pauseBtn).toHaveAttribute("aria-pressed", "false");
+  });
+
+  it("toggles pause and resume states when pause button is activated", () => {
+    const featured = getFeaturedProjects();
+    render(<ProjectRail projects={featured} />);
+
+    const pauseBtn = screen.getByRole("button", { name: /pause project carousel auto-scroll/i });
+    expect(screen.getByText("Auto-scrolling")).toBeInTheDocument();
+
+    // Click to pause
+    fireEvent.click(pauseBtn);
+    expect(pauseBtn).toHaveAttribute("aria-label", "Resume project carousel auto-scroll");
+    expect(pauseBtn).toHaveAttribute("aria-pressed", "true");
+    expect(screen.getByText("Auto-scroll paused")).toBeInTheDocument();
+
+    // Click to resume
+    fireEvent.click(pauseBtn);
+    expect(pauseBtn).toHaveAttribute("aria-label", "Pause project carousel auto-scroll");
+    expect(pauseBtn).toHaveAttribute("aria-pressed", "false");
+    expect(screen.getByText("Auto-scrolling")).toBeInTheDocument();
+  });
+
+  it("pauses auto-scroll on pointer hover and resumes on pointer leave", () => {
+    const featured = getFeaturedProjects();
+    render(<ProjectRail projects={featured} />);
+
+    const rail = screen.getByTestId("project-rail");
+
+    fireEvent.mouseEnter(rail);
+    expect(screen.getByText("Hover paused")).toBeInTheDocument();
+
+    fireEvent.mouseLeave(rail);
+    expect(screen.getByText("Auto-scrolling")).toBeInTheDocument();
+  });
+
+  it("pauses auto-scroll on focus and resumes on blur", () => {
+    const featured = getFeaturedProjects();
+    render(<ProjectRail projects={featured} />);
+
+    const rail = screen.getByTestId("project-rail");
+
+    fireEvent.focus(rail);
+    expect(screen.getByText("Focus paused")).toBeInTheDocument();
+
+    fireEvent.blur(rail, { relatedTarget: document.body });
+    expect(screen.getByText("Auto-scrolling")).toBeInTheDocument();
+  });
+
+  it("disables auto-scrolling when prefers-reduced-motion is active", () => {
+    window.matchMedia = vi.fn().mockImplementation((query: string) => ({
+      matches: query.includes("prefers-reduced-motion: reduce"),
+      media: query,
+      onchange: null,
+      addListener: vi.fn(),
+      removeListener: vi.fn(),
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+      dispatchEvent: vi.fn(),
+    }));
+
+    const featured = getFeaturedProjects();
+    render(<ProjectRail projects={featured} />);
+
+    expect(screen.getByText("Manual navigation")).toBeInTheDocument();
   });
 
   it("renders scrollable region with accessible label", () => {
