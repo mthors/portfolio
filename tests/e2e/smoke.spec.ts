@@ -72,6 +72,68 @@ test.describe("M0 Smoke Test", () => {
     await expect(footer).toContainText(/Moh Thoriqi Sahal/i);
   });
 
+  test("allows clicking project card links (Live Demo) and supports pointer drag on rail", async ({
+    page,
+  }) => {
+    await page.goto("/");
+
+    // 1. Verify project card link (Live Demo) is clickable and receives native click event
+    const hondaLink = page.getByRole("link", {
+      name: "Open live demo for Honda Satrya Dealer Group",
+    });
+    await expect(hondaLink).toBeVisible();
+    await expect(hondaLink).toHaveAttribute("href", "https://honda.thorx.my.id");
+    await expect(hondaLink).toHaveAttribute("target", "_blank");
+
+    // Intercept click to verify event dispatch without leaving page
+    await page.evaluate(() => {
+      (window as unknown as { __linkClicked: boolean }).__linkClicked = false;
+      const link = document.querySelector(
+        'a[aria-label="Open live demo for Honda Satrya Dealer Group"]'
+      );
+      link?.addEventListener("click", (e) => {
+        e.preventDefault();
+        (window as unknown as { __linkClicked: boolean }).__linkClicked = true;
+      });
+    });
+
+    await hondaLink.click();
+    const wasClicked = await page.evaluate(
+      () => (window as unknown as { __linkClicked: boolean }).__linkClicked
+    );
+    expect(wasClicked).toBe(true);
+
+    // 2. Verify dragging on non-interactive rail area moves scroll position
+    const rail = page.getByTestId("project-rail");
+    const box = await rail.boundingBox();
+    expect(box).not.toBeNull();
+
+    if (box) {
+      // Pause auto-scrolling to measure drag movement accurately
+      const pauseBtn = page.getByRole("button", {
+        name: /pause project carousel auto-scroll/i,
+      });
+      await pauseBtn.click();
+
+      // Ensure rail is scrolled into view
+      await rail.scrollIntoViewIfNeeded();
+
+      const initialScroll = await rail.evaluate((el) => el.scrollLeft);
+
+      // Drag horizontally from right to left across rail track
+      const currentBox = await rail.boundingBox();
+      if (currentBox) {
+        await page.mouse.move(currentBox.x + 400, currentBox.y + 50);
+        await page.mouse.down();
+        await page.mouse.move(currentBox.x + 250, currentBox.y + 50, { steps: 10 });
+        await page.mouse.up();
+
+        const newScroll = await rail.evaluate((el) => el.scrollLeft);
+        expect(newScroll).toBeGreaterThan(initialScroll);
+      }
+    }
+  });
+
   test("serves health check endpoint with healthy status", async ({ request }) => {
     const response = await request.get("/api/health");
     expect(response.status()).toBe(200);

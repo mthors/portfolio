@@ -200,4 +200,24 @@ describe("ProjectRail Component", () => {
     expect(region).toBeInTheDocument();
     expect(region).toHaveAttribute("data-testid", "project-rail");
   });
+
+  it("allows clicking project card links without initiating drag state", () => {
+    const featured = getFeaturedProjects();
+    render(<ProjectRail projects={featured} />);
+
+    const link = screen.getByRole("link", {
+      name: "Open live demo for Honda Satrya Dealer Group",
+    });
+
+    let clickFired = false;
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      clickFired = true;
+    });
+
+    fireEvent.pointerDown(link, { pointerType: "mouse", button: 0, clientX: 100 });
+    fireEvent.click(link);
+
+    expect(clickFired).toBe(true);
+  });
 });

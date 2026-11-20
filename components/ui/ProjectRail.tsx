@@ -26,9 +26,11 @@ export function ProjectRail({ projects }: ProjectRailProps) {
   const cooldownTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   // Drag tracking refs
+  const isPointerDownRef = useRef<boolean>(false);
   const dragStartXRef = useRef<number>(0);
   const dragStartScrollLeftRef = useRef<number>(0);
   const hasDraggedRef = useRef<boolean>(false);
+  const DRAG_THRESHOLD = 6; // minimum pixels moved before initiating drag
 
   // Measure single cycle width directly from the DOM children
   const updateCycleWidth = useCallback(() => {
@@ -71,10 +73,19 @@ export function ProjectRail({ projects }: ProjectRailProps) {
     mobileQuery.addEventListener("change", updateMedia);
     window.addEventListener("resize", updateCycleWidth);
 
+    const el = railRef.current;
+    const preventDrag = (e: DragEvent) => e.preventDefault();
+    if (el) {
+      el.addEventListener("dragstart", preventDrag, { capture: true });
+    }
+
     return () => {
       motionQuery.removeEventListener("change", updateMedia);
       mobileQuery.removeEventListener("change", updateMedia);
       window.removeEventListener("resize", updateCycleWidth);
+      if (el) {
+        el.removeEventListener("dragstart", preventDrag, { capture: true });
+      }
     };
   }, [updateCycleWidth, projects]);
 
@@ -217,31 +228,43 @@ export function ProjectRail({ projects }: ProjectRailProps) {
   // Desktop Pointer Drag Handlers
   const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
     if (e.pointerType !== "mouse" || e.button !== 0) return;
+
+    // Do not initiate drag if user interacted with links, buttons, or interactive controls
+    const target = e.target as HTMLElement | null;
+    if (target?.closest("a, button, input, textarea, select, [role='button'], [role='link']")) {
+      return;
+    }
+
     const el = railRef.current;
     if (!el) return;
 
     dragStartXRef.current = e.clientX;
     dragStartScrollLeftRef.current = el.scrollLeft;
     hasDraggedRef.current = false;
-    setIsDragging(true);
-
-    try {
-      (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
-    } catch {
-      // Ignore if pointer capture fails
-    }
+    isPointerDownRef.current = true;
   };
 
   const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (!isDragging || e.pointerType !== "mouse") return;
+    if (!isPointerDownRef.current || e.pointerType !== "mouse") return;
     const el = railRef.current;
     if (!el) return;
 
     const deltaX = e.clientX - dragStartXRef.current;
-    if (Math.abs(deltaX) > 5) {
-      hasDraggedRef.current = true;
-      const cycleWidth = cycleWidthRef.current || el.scrollWidth / 2;
 
+    // Only initiate drag state and pointer capture once movement exceeds threshold
+    if (!hasDraggedRef.current && Math.abs(deltaX) > DRAG_THRESHOLD) {
+      hasDraggedRef.current = true;
+      setIsDragging(true);
+
+      try {
+        (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+      } catch {
+        // Ignore if pointer capture fails
+      }
+    }
+
+    if (hasDraggedRef.current) {
+      const cycleWidth = cycleWidthRef.current || el.scrollWidth / 2;
       let newScrollLeft = dragStartScrollLeftRef.current - deltaX;
       if (cycleWidth > 0) {
         if (newScrollLeft >= cycleWidth) {
@@ -257,13 +280,19 @@ export function ProjectRail({ projects }: ProjectRailProps) {
   };
 
   const handlePointerEnd = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (!isDragging || e.pointerType !== "mouse") return;
-    setIsDragging(false);
+    if (e.pointerType !== "mouse") return;
+    isPointerDownRef.current = false;
 
-    try {
-      (e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId);
-    } catch {
-      // Ignore release error
+    if (isDragging) {
+      setIsDragging(false);
+
+      try {
+        if ((e.currentTarget as HTMLElement).hasPointerCapture(e.pointerId)) {
+          (e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId);
+        }
+      } catch {
+        // Ignore release error
+      }
     }
 
     if (hasDraggedRef.current) {
@@ -404,12 +433,14 @@ export function ProjectRail({ projects }: ProjectRailProps) {
         onPointerUp={handlePointerEnd}
         onPointerCancel={handlePointerEnd}
         onClickCapture={handleClickCapture}
+        onDragStart={(e) => e.preventDefault()}
         className={cn(
           "flex gap-6 overflow-x-auto pb-6 pt-2 -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8",
           "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-(--accent)/40",
           "[scrollbar-width:thin] [scrollbar-color:var(--border)_transparent]",
           isMobile || prefersReducedMotion ? "snap-x snap-mandatory scroll-smooth" : "snap-none",
-          isDragging ? "cursor-grabbing select-none" : "cursor-grab"
+          isDragging ? "cursor-grabbing select-none" : "cursor-grab",
+          "[&_img]:pointer-events-none [&_img]:select-none"
         )}
       >
         {/* Primary Project Cards (Original structure, dimensions, and layout) */}
