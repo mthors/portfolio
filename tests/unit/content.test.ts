@@ -35,6 +35,17 @@ describe("Content Architecture & Project Schema", () => {
     expect(manufacturingIt?.technologies).toContain("Crystal Reports");
   });
 
+  it("contains the Honda dealership project with accurate metadata", () => {
+    const honda = getProjectBySlug("honda-dealership");
+    expect(honda).toBeDefined();
+    expect(honda?.title).toContain("Honda Satrya Dealer Group");
+    expect(honda?.category).toBe("Full-Stack Web Application");
+    expect(honda?.liveUrl).toBe("https://honda.thorx.my.id");
+    expect(honda?.technologies).toContain("Next.js");
+    expect(honda?.technologies).toContain("Supabase");
+    expect(honda?.technologies).toContain("PostgreSQL");
+  });
+
   it("returns featured projects correctly", () => {
     const featured = getFeaturedProjects();
     expect(featured.length).toBeGreaterThan(0);

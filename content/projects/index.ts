@@ -48,8 +48,8 @@ export const projects: Project[] = [
       "Relational data model backed by PostgreSQL and Supabase",
       "Automated deployment pipeline and component testing backed by Git version control",
     ],
-    githubUrl: "https://github.com/mthors/outsole-webapp",
-    liveUrl: "https://outsole-catalog.demo",
+    //githubUrl: "https://github.com/mthors/outsole-webapp",
+    liveUrl: "https://outsole.thorx.my.id",
   },
   {
     slug: "manufacturing-it-erp",
@@ -76,6 +76,36 @@ export const projects: Project[] = [
       "Production and compliance reporting automation with Crystal Reports, Excel, and administrative data exports",
       "Physical and network infrastructure support maintaining operational continuity across office and shop-floor terminals",
     ],
+  },
+  {
+    slug: "honda-dealership",
+    title: "Honda Satrya Dealer Group",
+    category: "Full-Stack Web Application",
+    featured: true,
+    status: "active",
+    shortDescription:
+      "Digital motorcycle showroom developed for Honda dealership operations, featuring model catalogs, local OTR pricing, and inquiry management.",
+    description:
+      "A digital motorcycle showroom developed for Honda Satrya Dealer Group (Mega Persada Mandiri), allowing customers to explore motorcycle models, view local on-the-road pricing, and submit product inquiries through a responsive web application. Features include catalog exploration, unit detail pages, an administrative content management system, and customer inquiry export to Excel, backed by Supabase and PostgreSQL.",
+    image: "/images/projects/honda-webapp.png",
+    technologies: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Supabase",
+      "PostgreSQL",
+      "Excel Export",
+    ],
+    highlights: [
+      "Motorcycle catalog and product detail pages with responsive customer-facing interface",
+      "Local dealership on-the-road (OTR) pricing calculation and display",
+      "Product inquiry submission form with structured lead capture",
+      "Admin functionality for managing dealership content and unit specifications",
+      "Inquiry data export to Excel for sales follow-ups and operational reporting",
+      "Relational database integration and backend functionality using Supabase and PostgreSQL",
+    ],
+    liveUrl: "https://honda.thorx.my.id",
   },
 ];
 

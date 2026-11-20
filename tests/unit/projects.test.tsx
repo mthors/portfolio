@@ -82,6 +82,7 @@ describe("ProjectRail Component", () => {
     expect(screen.getByText(/Lightweight Desktop Inventory System/i)).toBeInTheDocument();
     expect(screen.getByText(/Outsole Catalog/i)).toBeInTheDocument();
     expect(screen.getByText(/Manufacturing IT & Systems Operations/i)).toBeInTheDocument();
+    expect(screen.getByText(/Honda Satrya Dealer Group/i)).toBeInTheDocument();
   });
 
   it("renders navigation controls with accessible labels", () => {
